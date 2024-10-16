@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Etxeak": {
+    "etxeakArrayArgazkiakWeb": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/etxeak",
+            "outputPath": "dist/etxeak-array-argazkiak-web",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Etxeak:build:production"
+              "buildTarget": "etxeakArrayArgazkiakWeb:build:production"
             },
             "development": {
-              "buildTarget": "Etxeak:build:development"
+              "buildTarget": "etxeakArrayArgazkiakWeb:build:development"
             }
           },
           "defaultConfiguration": "development"
