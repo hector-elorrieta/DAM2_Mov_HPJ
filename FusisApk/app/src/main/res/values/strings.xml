@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FusisApk_Java</string>
+    <string name="etorri">Ongi etorri!</string>
+    <string name="jarraitu">Jarraitu</string>
+    <string name="textErabiltzailea">Erabiltzailea</string>
+    <string name="textPasahitza">Pasahitza</string>
+    <string name="button">Sartu</string>
+    <string name="login">Login</string>
+    <string name="erregistratuhemen">Erregistratu hemen</string>
 </resources>

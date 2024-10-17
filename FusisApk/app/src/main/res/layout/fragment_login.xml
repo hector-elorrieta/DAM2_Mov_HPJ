@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2196F3"
+    tools:context=".BigarrenFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2196F3"
+        android:foregroundTint="#924343">
+
+        <TextView
+            android:id="@+id/textView4"
+            style="@android:style/Widget.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="146dp"
+            android:layout_marginTop="232dp"
+            android:layout_marginEnd="146dp"
+            android:breakStrategy="high_quality"
+            android:text="@string/login"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textSize="48sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textPasahitza"
+            android:layout_width="322dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:background="#FBFBFB"
+            android:gravity="center|start|left"
+            android:hint="@string/textPasahitza"
+            android:inputType="text|textPassword|textNoSuggestions"
+            android:paddingStart="20px"
+            android:shadowColor="#292929"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="424dp" />
+
+        <Button
+            android:id="@+id/jarraitu"
+            android:layout_width="322dp"
+            android:layout_height="55dp"
+            android:backgroundTint="#474747"
+            android:backgroundTintMode="add"
+            android:text="@string/jarraitu"
+            android:textColorHint="#6D3F3F"
+            android:textColorLink="#100B0B"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="52dp"
+            tools:layout_editor_absoluteY="548dp" />
+
+        <CheckBox
+            android:id="@+id/checkBoxGogoratu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
+            android:text="Gogoratu"
+            android:textColor="#FFFFFF"
+            android:textColorHighlight="#963B3B"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="52dp"
+            tools:layout_editor_absoluteY="488dp" />
+
+        <TextView
+            android:id="@+id/LinkErregistratu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="@string/erregistratuhemen"
+            android:textColor="#0022FF"
+            android:textColorLink="#E63535"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="223dp"
+            tools:layout_editor_absoluteY="616dp" />
+
+        <TextView
+            android:id="@+id/textErabiltzailea"
+            android:layout_width="322dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:background="#FBFBFB"
+            android:gravity="center|start|left"
+            android:hint="@string/textErabiltzailea"
+            android:paddingStart="20px"
+            android:shadowColor="#292929"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="344dp" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="408dp"
+            android:layout_height="276dp"
+            android:src="@drawable/logoblancotransparente"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
