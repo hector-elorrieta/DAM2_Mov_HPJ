@@ -7,4 +7,10 @@
     <string name="button">Sartu</string>
     <string name="login">Login</string>
     <string name="erregistratuhemen">Erregistratu hemen</string>
+    <string name="loginhemen">Logeatu hemen</string>
+    <string name="erregistratu">Erregistratu</string>
+    <string name="izena">Izena</string>
+    <string name="abizena">Abizena</string>
+    <string name="email">Email</string>
+    <string name="jaiotzedata">Jaiotze data</string>
 </resources>

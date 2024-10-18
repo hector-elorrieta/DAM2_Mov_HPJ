@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2D2D2D"
+        android:backgroundTint="@color/black"
+        android:backgroundTintMode="screen"
+        android:foregroundTint="#924343">
+
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="419dp"
+            android:layout_height="114dp"
+            android:src="@drawable/logoblancotransparente"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/LinkErregistratu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="257dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:text="@string/loginhemen"
+            android:textColor="#2196F3"
+            android:textColorLink="#E63535"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="419dp"
+            android:layout_height="605dp"
+            android:layout_marginBottom="7dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/LinkErregistratu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo">
+
+            <TextView
+                android:id="@+id/textLogin"
+                style="@android:style/Widget.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:breakStrategy="high_quality"
+                android:text="@string/erregistratu"
+                android:textColor="#FFFFFF"
+                android:textColorLink="#FFFFFF"
+                android:textSize="48sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <TextView
+                android:id="@+id/textDate"
+                android:layout_width="322dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginBottom="20dp"
+                android:background="#8D8D8D"
+                android:gravity="center|start|left"
+                android:hint="@string/email"
+                android:inputType="datetime|date"
+                android:paddingStart="20px"
+                android:shadowColor="#292929"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#474343"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textErabiltzailea"
+                android:layout_width="322dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginBottom="20dp"
+                android:background="#8D8D8D"
+                android:gravity="center|start|left"
+                android:hint="@string/textErabiltzailea"
+                android:inputType="text|textNoSuggestions"
+                android:paddingStart="20px"
+                android:shadowColor="#292929"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#474343"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textIzena"
+                android:layout_width="322dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginBottom="20dp"
+                android:background="#8D8D8D"
+                android:gravity="center|start|left"
+                android:hint="@string/izena"
+                android:inputType="text|textNoSuggestions"
+                android:paddingStart="20px"
+                android:shadowColor="#292929"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#474343"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textAbizena"
+                android:layout_width="322dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginBottom="20dp"
+                android:background="#8D8D8D"
+                android:gravity="center|start|left"
+                android:hint="@string/abizena"
+                android:inputType="text|textNoSuggestions"
+                android:paddingStart="20px"
+                android:shadowColor="#292929"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#474343"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/textPasahitza2"
+                android:layout_width="322dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginBottom="20dp"
+                android:background="#8D8D8D"
+                android:ems="10"
+                android:gravity="center|start|left"
+                android:hint="@string/textPasahitza"
+                android:inputType="textPassword|textNoSuggestions"
+                android:paddingStart="20px"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#474343"
+                android:textSize="24sp" />
+
+            <Spinner
+                android:id="@+id/spinnerMota"
+                android:layout_width="322dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginEnd="45dp"
+                android:textSize="24sp"
+                android:background="#8D8D8D"
+                android:textColor="#FFFFFF" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="19dp" />
+
+            <Button
+                android:id="@+id/btnJarraitu"
+                android:layout_width="322dp"
+                android:layout_height="55dp"
+                android:backgroundTint="#2196F3"
+                android:backgroundTintMode="add"
+                android:text="@string/jarraitu"
+                android:textColorHint="#6D3F3F"
+                android:textColorLink="#100B0B"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

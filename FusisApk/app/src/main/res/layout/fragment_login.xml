@@ -5,16 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2196F3"
-    tools:context=".BigarrenFragment">
+    android:backgroundTint="@color/black"
+    android:backgroundTintMode="add"
+    tools:context=".LoginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#2196F3"
+        android:backgroundTint="@color/black"
+        android:backgroundTintMode="screen"
         android:foregroundTint="#924343">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textLogin"
             style="@android:style/Widget.TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,84 +36,115 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textPasahitza"
+            android:id="@+id/textErabiltzailea"
             android:layout_width="322dp"
             android:layout_height="55dp"
             android:layout_marginStart="45dp"
+            android:layout_marginTop="45dp"
             android:layout_marginEnd="45dp"
             android:background="#FBFBFB"
             android:gravity="center|start|left"
-            android:hint="@string/textPasahitza"
-            android:inputType="text|textPassword|textNoSuggestions"
+            android:hint="@string/textErabiltzailea"
+            android:inputType="text|textNoSuggestions"
             android:paddingStart="20px"
             android:shadowColor="#292929"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="424dp" />
+            app:layout_constraintTop_toBottomOf="@+id/textLogin" />
 
         <Button
-            android:id="@+id/jarraitu"
+            android:id="@+id/btnJarraitu"
             android:layout_width="322dp"
             android:layout_height="55dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="45dp"
             android:backgroundTint="#474747"
             android:backgroundTintMode="add"
             android:text="@string/jarraitu"
             android:textColorHint="#6D3F3F"
             android:textColorLink="#100B0B"
             android:textSize="16sp"
-            tools:layout_editor_absoluteX="52dp"
-            tools:layout_editor_absoluteY="548dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxGogoratu"
+            tools:ignore="MissingConstraints" />
 
         <CheckBox
             android:id="@+id/checkBoxGogoratu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="241dp"
+            android:layout_marginBottom="10dp"
             android:buttonTint="@color/white"
             android:text="Gogoratu"
             android:textColor="#FFFFFF"
             android:textColorHighlight="#963B3B"
             android:textSize="20sp"
-            tools:layout_editor_absoluteX="52dp"
-            tools:layout_editor_absoluteY="488dp" />
+            app:layout_constraintBottom_toTopOf="@+id/btnJarraitu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textPasahitza" />
 
         <TextView
             android:id="@+id/LinkErregistratu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="223dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="90dp"
             android:clickable="true"
+            android:gravity="center"
+            android:minHeight="48dp"
             android:text="@string/erregistratuhemen"
             android:textColor="#0022FF"
             android:textColorLink="#E63535"
             android:textSize="18sp"
-            tools:layout_editor_absoluteX="223dp"
-            tools:layout_editor_absoluteY="616dp" />
-
-        <TextView
-            android:id="@+id/textErabiltzailea"
-            android:layout_width="322dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="45dp"
-            android:layout_marginEnd="45dp"
-            android:background="#FBFBFB"
-            android:gravity="center|start|left"
-            android:hint="@string/textErabiltzailea"
-            android:paddingStart="20px"
-            android:shadowColor="#292929"
-            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="344dp" />
+            app:layout_constraintTop_toBottomOf="@+id/btnJarraitu"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="408dp"
-            android:layout_height="276dp"
+            android:layout_width="406dp"
+            android:layout_height="312dp"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/logoblancotransparente"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
+            app:layout_constraintBottom_toTopOf="@+id/textLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/textPasahitza"
+            android:layout_width="322dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="10dp"
+            android:background="#FBFBFB"
+            android:ems="10"
+            android:gravity="center|start|left"
+            android:hint="@string/textPasahitza"
+            android:inputType="textPassword|textNoSuggestions"
+            android:paddingStart="20px"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/checkBoxGogoratu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textErabiltzailea" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
