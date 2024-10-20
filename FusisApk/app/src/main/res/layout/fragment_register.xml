@@ -15,23 +15,13 @@
         android:foregroundTint="#924343">
 
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="419dp"
-            android:layout_height="114dp"
-            android:src="@drawable/logoblancotransparente"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/LinkErregistratu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="257dp"
             android:layout_marginEnd="45dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="56dp"
             android:clickable="true"
             android:gravity="center"
             android:minHeight="48dp"
@@ -41,20 +31,20 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="419dp"
-            android:layout_height="605dp"
-            android:layout_marginBottom="7dp"
+            android:layout_width="408dp"
+            android:layout_height="651dp"
+            android:layout_marginTop="120dp"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/LinkErregistratu"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.666"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logo">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textLogin"
@@ -69,29 +59,48 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="32dp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/textDate"
                 android:layout_width="322dp"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginEnd="45dp"
                 android:layout_marginBottom="20dp"
                 android:background="#8D8D8D"
                 android:gravity="center|start|left"
-                android:hint="@string/email"
-                android:inputType="datetime|date"
+                android:hint="@string/jaiotzedata"
+                android:inputType="date"
+                android:focusable="false"
+                android:clickable="true"
                 android:paddingStart="20px"
                 android:shadowColor="#292929"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#474343"
                 android:textSize="24sp" />
 
-            <TextView
+            <EditText
+                android:id="@+id/textEmail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginBottom="20dp"
+                android:background="#8D8D8D"
+                android:gravity="center|start|left"
+                android:hint="@string/email"
+                android:inputType="text|textEmailSubject|textNoSuggestions"
+                android:paddingStart="20px"
+                android:shadowColor="#292929"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#474343"
+                android:textSize="24sp" />
+
+            <EditText
                 android:id="@+id/textErabiltzailea"
                 android:layout_width="322dp"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginEnd="45dp"
                 android:layout_marginBottom="20dp"
@@ -105,27 +114,27 @@
                 android:textColorHint="#474343"
                 android:textSize="24sp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/textIzena"
                 android:layout_width="322dp"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginEnd="45dp"
                 android:layout_marginBottom="20dp"
                 android:background="#8D8D8D"
                 android:gravity="center|start|left"
                 android:hint="@string/izena"
-                android:inputType="text|textNoSuggestions"
+                android:inputType="text|textPersonName|textNoSuggestions"
                 android:paddingStart="20px"
                 android:shadowColor="#292929"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#474343"
                 android:textSize="24sp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/textAbizena"
                 android:layout_width="322dp"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginEnd="45dp"
                 android:layout_marginBottom="20dp"
@@ -142,7 +151,7 @@
             <EditText
                 android:id="@+id/textPasahitza2"
                 android:layout_width="322dp"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginEnd="45dp"
                 android:layout_marginBottom="20dp"
@@ -159,16 +168,17 @@
             <Spinner
                 android:id="@+id/spinnerMota"
                 android:layout_width="322dp"
-                android:layout_height="55dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginEnd="45dp"
-                android:textSize="24sp"
                 android:background="#8D8D8D"
-                android:textColor="#FFFFFF" />
+                android:textSize="20sp"
+                android:gravity="left"
+                android:textColor="#FF0000"  />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="19dp" />
+                android:layout_height="20dp" />
 
             <Button
                 android:id="@+id/btnJarraitu"
@@ -182,6 +192,16 @@
                 android:textSize="16sp" />
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="413dp"
+            android:layout_height="126dp"
+            android:src="@drawable/logoblancotransparente"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
