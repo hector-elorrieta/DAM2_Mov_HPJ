@@ -36,9 +36,9 @@ LoginFragment extends Fragment {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView erabiltzaile = view.findViewById(R.id.textErabiltzailea);
+                TextView email = view.findViewById(R.id.textErabiltzailea);
                 TextView pasahitza = view.findViewById(R.id.textPasahitza);
-                signIn(erabiltzaile.getText().toString(), pasahitza.getText().toString());
+                signIn(email.getText().toString(), pasahitza.getText().toString());
             }
         });
         TextView LinkErregistratu = view.findViewById(R.id.LinkErregistratu);
@@ -55,25 +55,32 @@ LoginFragment extends Fragment {
         return view;
     }
 
-    private void signIn(String erabiltzaile, String password) {
-        mAuth.signInWithEmailAndPassword(erabiltzaile, password)
+    private void signIn(String mail, String pasahitza) {
+        mAuth.signInWithEmailAndPassword(mail, pasahitza)
                 .addOnCompleteListener(getActivity(), task -> {
-                    Log.e("TAG", task.toString());
+                    if (mail.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
+                        Toast.makeText(getActivity(), "Ingrese un correo electrónico válido", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (pasahitza.isEmpty()) {
+                        Toast.makeText(getActivity(), "Ingrese una contraseña", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         checkUserInFirestore(user);
-                        Log.e("TAG", user.getDisplayName());
                     } else {
-                        Log.e("TAG", "WAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                         Log.w("TAG", "signInWithUser:failure", task.getException());
                         Toast.makeText(getActivity(), "Authentication failed.",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
     private void checkUserInFirestore(FirebaseUser user) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("erabiltzaileak").document(user.getDisplayName()).get()
+        db.collection("erabiltzaileak").document(user.getEmail()).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
@@ -87,4 +94,20 @@ LoginFragment extends Fragment {
                     }
                 });
     }
+
+//    private void readAllUsersFromFirestore() {
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        db.collection("erabiltzaileak")
+//                .get()
+//                .addOnCompleteListener(task -> {
+//                    if (task.isSuccessful()) {
+//                        for (DocumentSnapshot document : task.getResult()) {
+//                            Log.d("FirestoreData", document.getId() + " => " + document.getData());
+//                        }
+//                    } else {
+//                        Log.w("FirestoreError", "Error getting documents.", task.getException());
+//                    }
+//                });
+//    }
+
 }
