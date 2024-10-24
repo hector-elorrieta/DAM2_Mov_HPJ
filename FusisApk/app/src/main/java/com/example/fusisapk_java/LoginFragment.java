@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,13 +59,15 @@ LoginFragment extends Fragment {
     private void signIn(String mail, String pasahitza) {
         mAuth.signInWithEmailAndPassword(mail, pasahitza)
                 .addOnCompleteListener(getActivity(), task -> {
-                    if (mail.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
-                        Toast.makeText(getActivity(), "Ingrese un correo electrónico válido", Toast.LENGTH_SHORT).show();
+                    if (mail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
+                        Toast.makeText(getActivity(), "Ingrese un correo electrónico válido",
+                                Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                     if (pasahitza.isEmpty()) {
-                        Toast.makeText(getActivity(), "Ingrese una contraseña", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Ingrese una contraseña",
+                                Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (task.isSuccessful()) {
@@ -94,20 +97,4 @@ LoginFragment extends Fragment {
                     }
                 });
     }
-
-//    private void readAllUsersFromFirestore() {
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        db.collection("erabiltzaileak")
-//                .get()
-//                .addOnCompleteListener(task -> {
-//                    if (task.isSuccessful()) {
-//                        for (DocumentSnapshot document : task.getResult()) {
-//                            Log.d("FirestoreData", document.getId() + " => " + document.getData());
-//                        }
-//                    } else {
-//                        Log.w("FirestoreError", "Error getting documents.", task.getException());
-//                    }
-//                });
-//    }
-
 }
