@@ -115,7 +115,7 @@
                 android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/textIzena"
+                android:id="@+id/izena"
                 android:layout_width="322dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="45dp"
