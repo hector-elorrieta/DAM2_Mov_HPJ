@@ -22,7 +22,7 @@
             tools:layout_editor_absoluteY="130dp" />
 
         <TextView
-            android:id="@+id/izena"
+            android:id="@+id/textIzena"
             android:layout_width="122dp"
             android:layout_height="32dp"
             android:layout_marginStart="132dp"

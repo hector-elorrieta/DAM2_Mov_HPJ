@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +31,8 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
-    private EditText txtIzena, txtAbizenak, txtErabiltzaile, txtPasahitza, editJaiotzeData, textEmail;
+    private EditText txtIzena, txtAbizenak, txtErabiltzaile, txtPasahitza, editJaiotzeData,
+            textEmail;
     private Spinner spinnerMota;
 
     @SuppressLint("MissingInflatedId")
@@ -78,7 +77,7 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
         btnErregistratu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registrarUsuario();
+                erregistroEgin();
             }
         });
 
@@ -93,7 +92,7 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
         editJaiotzeData.setText(day + "/" + (month + 1) + "/" + year);
     }
 
-    private void registrarUsuario() {
+    private void erregistroEgin() {
         String izena = txtIzena.getText().toString().trim();
         String abizenak = txtAbizenak.getText().toString().trim();
         String erabiltzailea = txtErabiltzaile.getText().toString().toLowerCase().trim();
@@ -109,7 +108,7 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
             return;
         }
 
-        // Crear usuario en Firebase Authentication
+        // Erabiltzailea erregistratu Firebase-en
         mAuth.createUserWithEmailAndPassword(email, pasahitza)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
