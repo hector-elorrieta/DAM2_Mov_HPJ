@@ -55,7 +55,7 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
         Spinner spinnerMota = view.findViewById(R.id.spinnerMota);
         Button btnErregistratu = view.findViewById(R.id.btnJarraitu);
 
-        String[] motak = {"Bezeroa", "Prestatzailea"};
+        String[] motak = {"Bezeroa", "Entrenatzailea"};
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, motak);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -100,6 +100,7 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
         String email = textEmail.getText().toString().trim();
         String pasahitza = txtPasahitza.getText().toString().trim();
         String mota = spinnerMota.getSelectedItem().toString();
+        // Data bezala jaso eta Firebase-en gordetzeko formatuan pasatzen da.
         Timestamp jaiotzeData = DataFuntzioak.stringToTimestamp(editJaiotzeData.getText().toString());
 
         if (izena.isEmpty() || abizenak.isEmpty() || erabiltzailea.isEmpty() ||

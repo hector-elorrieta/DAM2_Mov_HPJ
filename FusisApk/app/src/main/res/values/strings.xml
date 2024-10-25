@@ -15,5 +15,9 @@
     <string name="jaiotzedata">Jaiotze data</string>
     <string name="itxiSaioa">Itxi Saioa</string>
     <string name="atzera">Atzera</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="workout">Workout</string>
+    <string name="ariketak">Ariketak</string>
+    <string name="workoutak">Workout-ak</string>
+    <string name="historiala">Zure historiala</string>
+    <string name="maila">Maila: </string>
 </resources>

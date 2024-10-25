@@ -18,7 +18,7 @@
         android:foregroundTint="#924343">
 
         <TextView
-            android:id="@+id/textLogin"
+            android:id="@+id/textWorkOut"
             style="@android:style/Widget.TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textLogin" />
+            app:layout_constraintTop_toBottomOf="@+id/textWorkOut" />
 
         <Button
             android:id="@+id/btnJarraitu"
@@ -119,7 +119,7 @@
             android:layout_height="312dp"
             android:layout_marginBottom="20dp"
             android:src="@drawable/logoblancotransparente"
-            app:layout_constraintBottom_toTopOf="@+id/textLogin"
+            app:layout_constraintBottom_toTopOf="@+id/textWorkOut"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
