@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PerfilFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2196F3"
+        android:backgroundTint="@color/black"
+        android:backgroundTintMode="screen"
+        android:foregroundTint="#924343">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="500dp"
+            android:layout_height="500dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="41dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView7">
+
+            <TextView
+                android:id="@+id/izena"
+                android:layout_width="320dp"
+                android:layout_height="60dp"
+                android:background="#FBFBFB"
+                android:gravity="center|start|left"
+                android:hint="@string/izena"
+                android:inputType="text|textNoSuggestions"
+                android:paddingStart="20px"
+                android:shadowColor="#292929"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/abizena"
+                android:layout_width="320dp"
+                android:layout_height="60dp"
+                android:background="#FBFBFB"
+                android:gravity="center|start|left"
+                android:hint="@string/abizena"
+                android:inputType="text|textNoSuggestions"
+                android:paddingStart="20px"
+                android:shadowColor="#292929"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <EditText
+                android:id="@+id/jaiotzedata"
+                android:layout_width="320dp"
+                android:layout_height="60dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="false"
+                android:gravity="center|start|left"
+                android:hint="@string/jaiotzedata"
+                android:inputType="date"
+                android:paddingStart="20px"
+                android:shadowColor="#292929"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="320dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:background="#FBFBFB"
+                android:gravity="center|start|left"
+                android:hint="@string/email"
+                android:inputType="text|textNoSuggestions"
+                android:paddingStart="0px"
+                android:shadowColor="#292929"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+
+            <Button
+                android:id="@+id/ItxiSaioa"
+                android:layout_width="320dp"
+                android:layout_height="60dp"
+                android:backgroundTint="#474747"
+                android:backgroundTintMode="add"
+                android:text="@string/itxiSaioa"
+                android:textColorHint="#6D3F3F"
+                android:textColorLink="#100B0B"
+                android:textSize="16sp"
+                tools:ignore="MissingConstraints" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="108dp"
+            android:layout_height="119dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="43dp"
+            android:src="@drawable/logoblancotransparente"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toStartOf="@+id/atzera"
+            app:layout_constraintHorizontal_bias="0.022"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/atzera"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:backgroundTint="#474747"
+            android:backgroundTintMode="add"
+            android:text="@string/atzera"
+            android:textColorHint="#6D3F3F"
+            android:textColorLink="#100B0B"
+            android:textSize="16sp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="275dp"
+            tools:layout_editor_absoluteY="50dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

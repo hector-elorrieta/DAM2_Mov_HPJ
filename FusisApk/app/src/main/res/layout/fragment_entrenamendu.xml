@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2D313A"
+    android:backgroundTint="#2D313A"
+    tools:context=".EntrenamenduFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/maila"
+            android:layout_width="122dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="132dp"
+            android:text="Maila"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="130dp" />
+
+        <TextView
+            android:id="@+id/izena"
+            android:layout_width="122dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="132dp"
+            android:text="Izena"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="181dp" />
+
+        <TextView
+            android:id="@+id/historikoa"
+            android:layout_width="122dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="132dp"
+            android:text="Historikoa"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="234dp" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="108dp"
+            android:layout_height="94dp"
+            android:src="@drawable/fusistransparente"
+            tools:layout_editor_absoluteX="-1dp"
+            tools:layout_editor_absoluteY="1dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
