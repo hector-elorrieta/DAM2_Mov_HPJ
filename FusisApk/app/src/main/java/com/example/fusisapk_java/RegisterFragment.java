@@ -36,7 +36,6 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
             textEmail;
     private Spinner spinnerMota;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,6 +65,8 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
         // EL datepicker se muestra en un cuadro de diálogo emergente.
         // La interfaz de usuario del datepicker se proporciona por el sistema
         // y no se puede personalizar.
+
+
         editJaiotzeData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +102,17 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
         String pasahitza = txtPasahitza.getText().toString().trim();
         String mota = spinnerMota.getSelectedItem().toString();
         Timestamp jaiotzeData = DataFuntzioak.stringToTimestamp(editJaiotzeData.getText().toString());
+
+        if (pasahitza.length() < 6 || pasahitza.length() > 16) {
+            Toast.makeText(getContext(), "Pasahitza 6 eta 16 karaktere artean egon behar da",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (email == null || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(getContext(), "Sartu baliozko posta helbide bat",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (izena.isEmpty() || abizenak.isEmpty() || erabiltzailea.isEmpty() ||
                 pasahitza.isEmpty()) {
