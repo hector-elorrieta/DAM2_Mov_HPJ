@@ -45,7 +45,7 @@
                 android:layout_height="20dp" />
 
             <TextView
-                android:id="@+id/abizena"
+                android:id="@+id/textAbizena"
                 android:layout_width="320dp"
                 android:layout_height="60dp"
                 android:background="#FBFBFB"
@@ -61,7 +61,7 @@
                 android:layout_height="20dp" />
 
             <EditText
-                android:id="@+id/jaiotzedata"
+                android:id="@+id/textDate"
                 android:layout_width="320dp"
                 android:layout_height="60dp"
                 android:background="@color/white"
@@ -80,7 +80,7 @@
                 android:layout_height="20dp" />
 
             <TextView
-                android:id="@+id/email"
+                android:id="@+id/textEmail"
                 android:layout_width="320dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="0dp"
@@ -98,7 +98,7 @@
                 android:layout_height="60dp" />
 
             <Button
-                android:id="@+id/ItxiSaioa"
+                android:id="@+id/btnItxiSaioa"
                 android:layout_width="320dp"
                 android:layout_height="60dp"
                 android:backgroundTint="#474747"
@@ -119,13 +119,13 @@
             android:layout_marginBottom="43dp"
             android:src="@drawable/logoblancotransparente"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintEnd_toStartOf="@+id/atzera"
+            app:layout_constraintEnd_toStartOf="@+id/btnAtzera"
             app:layout_constraintHorizontal_bias="0.022"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/atzera"
+            android:id="@+id/btnAtzera"
             android:layout_width="120dp"
             android:layout_height="60dp"
             android:backgroundTint="#474747"
