@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -99,10 +100,10 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
         String email = textEmail.getText().toString().trim();
         String pasahitza = txtPasahitza.getText().toString().trim();
         String mota = spinnerMota.getSelectedItem().toString();
-        String jaiotzeData = editJaiotzeData.getText().toString();
+        Timestamp jaiotzeData = DataFuntzioak.stringToTimestamp(editJaiotzeData.getText().toString());
 
         if (izena.isEmpty() || abizenak.isEmpty() || erabiltzailea.isEmpty() ||
-                pasahitza.isEmpty() || jaiotzeData.isEmpty()) {
+                pasahitza.isEmpty()) {
             Toast.makeText(getContext(), "Derrigorrezko eremu guztiak bete behar dira",
                     Toast.LENGTH_SHORT).show();
             return;
@@ -123,10 +124,11 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
                             erabiltzaileBerria.put("erabiltzailea", erabiltzailea);
                             erabiltzaileBerria.put("mota", mota);
                             erabiltzaileBerria.put("pasahitza", pasahitza);
-                            //erabiltzaileBerria.put("jaiotzedata", jaiotzeData);
+                            erabiltzaileBerria.put("jaiotzedata", jaiotzeData);
 
 
-                            db.collection("erabiltzaileak").document(erabiltzaileBerria.get("erabiltzailea").toString())
+                            db.collection("erabiltzaileak").document(erabiltzaileBerria
+                                            .get("erabiltzailea").toString())
                                     .set(erabiltzaileBerria)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
