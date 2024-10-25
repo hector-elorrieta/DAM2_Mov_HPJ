@@ -26,7 +26,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView7">
+            app:layout_constraintTop_toBottomOf="@+id/logo">
 
             <TextView
                 android:id="@+id/textIzena"
@@ -111,7 +111,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/logo"
             android:layout_width="108dp"
             android:layout_height="119dp"
             android:layout_marginStart="36dp"

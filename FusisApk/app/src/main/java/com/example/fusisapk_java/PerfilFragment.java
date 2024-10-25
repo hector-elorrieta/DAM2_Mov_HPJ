@@ -1,11 +1,11 @@
 package com.example.fusisapk_java;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +30,9 @@ public class PerfilFragment extends Fragment {
         editJaiotzeData = view.findViewById(R.id.textDate);
         Button btnAtzera = view.findViewById(R.id.btnAtzera);
         Button btnItxiSaioa = view.findViewById(R.id.btnItxiSaioa);
+
+
+
 
         btnItxiSaioa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,4 +61,43 @@ public class PerfilFragment extends Fragment {
 
 
     }
+
+    private boolean izenaValidatu(){
+        String izena = txtIzena.getText().toString();
+        if(izena.isEmpty()){
+            txtIzena.setError("Izena sartu behar duzu");
+            return false;
+        }
+        return true;
+    }
+    private boolean abizenakValidatu(){
+        String abizenak = txtAbizenak.getText().toString();
+        if(abizenak.isEmpty()){
+            txtAbizenak.setError("Abizenak sartu behar dituzu");
+            return false;
+        }
+        return true;
+    }
+    private boolean emailaValidatu(){
+        String email = textEmail.getText().toString();
+        if(email.isEmpty()){
+            textEmail.setError("Emaila sartu behar duzu");
+            return false;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            textEmail.setError("Emaila okerra");
+            return false;
+        }
+        return true;
+    }
+    private boolean jaiotzeDataValidatu(){
+        String jaiotzeData = editJaiotzeData.getText().toString();
+        if(jaiotzeData.isEmpty()){
+            editJaiotzeData.setError("Jaiotze data sartu behar duzu");
+            return false;
+        }
+        return true;
+    }
+
+
 }
