@@ -73,6 +73,14 @@ LoginFragment extends Fragment {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         checkUserInFirestore(user);
+                        Toast.makeText(getActivity(), "Authentication successful.",
+                                Toast.LENGTH_SHORT).show();
+                        WorkoutFragment workoutFragment = new WorkoutFragment();
+                        FragmentTransaction transaction = getParentFragmentManager()
+                                                            .beginTransaction();
+                        transaction.replace(R.id.fragment_container, workoutFragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
                     } else {
                         Log.w("TAG", "signInWithUser:failure", task.getException());
                         Toast.makeText(getActivity(), "Authentication failed.",

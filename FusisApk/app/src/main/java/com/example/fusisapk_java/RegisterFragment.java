@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -60,13 +62,19 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMota.setAdapter(adapter);
 
+        TextView LinkErregistratu = view.findViewById(R.id.LinkErregistratu);
+        LinkErregistratu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginFragment loginFragment = new LoginFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, loginFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
         editJaiotzeData = view.findViewById(R.id.textDate);
-        // Cuando el usuario hace clic en el EditText, se muestra un DatePickerDialog.
-        // EL datepicker se muestra en un cuadro de diálogo emergente.
-        // La interfaz de usuario del datepicker se proporciona por el sistema
-        // y no se puede personalizar.
-
-
         editJaiotzeData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

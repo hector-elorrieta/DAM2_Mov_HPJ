@@ -5,19 +5,30 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 
 public class PerfilFragment extends Fragment {
-    private EditText txtIzena, txtAbizenak,  editJaiotzeData, btnAtzera,btnItxiSaioa,
+    private TextView txtIzena, txtAbizenak,
             textEmail;
+    private EditText editJaiotzeData;
+    private Button btnAtzera,btnItxiSaioa;
+    private FirebaseAuth auth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser erabiltzaileLogeatuta;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,6 +42,13 @@ public class PerfilFragment extends Fragment {
         Button btnAtzera = view.findViewById(R.id.btnAtzera);
         Button btnItxiSaioa = view.findViewById(R.id.btnItxiSaioa);
 
+        String ErabiltzaileID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String[] datuak = datuakLortu(ErabiltzaileID);
+
+        txtIzena.setText(datuak[0]);
+        txtAbizenak.setText(datuak[1]);
+        textEmail.setText(datuak[2]);
+        editJaiotzeData.setText(datuak[3]);
 
 
 
@@ -70,6 +88,7 @@ public class PerfilFragment extends Fragment {
         }
         return true;
     }
+
     private boolean abizenakValidatu(){
         String abizenak = txtAbizenak.getText().toString();
         if(abizenak.isEmpty()){
@@ -78,6 +97,7 @@ public class PerfilFragment extends Fragment {
         }
         return true;
     }
+
     private boolean emailaValidatu(){
         String email = textEmail.getText().toString();
         if(email.isEmpty()){
@@ -90,6 +110,7 @@ public class PerfilFragment extends Fragment {
         }
         return true;
     }
+
     private boolean jaiotzeDataValidatu(){
         String jaiotzeData = editJaiotzeData.getText().toString();
         if(jaiotzeData.isEmpty()){
@@ -99,5 +120,24 @@ public class PerfilFragment extends Fragment {
         return true;
     }
 
+    private String[] datuakLortu(String id){
+        String[] datuak = new String[4];
+        db.collection("erabiltzaileak").document(id)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        datuak[0] = documentSnapshot.getString("izena");
+                        datuak[1] = documentSnapshot.getString("abizena");
+                        datuak[2] = documentSnapshot.getString("mail");
+                        datuak[3] = documentSnapshot.getString("jaiotzeData");
+
+                    } else {
+                        Log.d("Firestore", "Ez dago erabiltzaile hori");
+                    }
+                });
+
+        return datuak;
+
+    }
 
 }
