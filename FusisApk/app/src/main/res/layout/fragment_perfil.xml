@@ -66,17 +66,17 @@
                 android:id="@+id/textDate"
                 android:layout_width="320dp"
                 android:layout_height="60dp"
-                android:background="@color/white"
-                android:fontFamily="@font/akshar"
-                android:clickable="true"
-                android:focusable="false"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:background="#FBFBFB"
                 android:gravity="center|start|left"
-                android:hint="@string/jaiotzedata"
-                android:inputType="date"
+                android:fontFamily="@font/akshar"
+                android:hint="@string/email"
+                android:inputType="text|textNoSuggestions"
                 android:paddingStart="20px"
                 android:shadowColor="#292929"
-                android:textColor="#FFFFFF"
                 android:textSize="24sp" />
+
 
             <Space
                 android:layout_width="match_parent"

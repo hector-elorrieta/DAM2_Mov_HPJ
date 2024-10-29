@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -42,15 +43,18 @@ public class PerfilFragment extends Fragment {
         Button btnAtzera = view.findViewById(R.id.btnAtzera);
         Button btnItxiSaioa = view.findViewById(R.id.btnItxiSaioa);
 
-        String ErabiltzaileID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String[] datuak = datuakLortu(ErabiltzaileID);
 
-        txtIzena.setText(datuak[0]);
-        txtAbizenak.setText(datuak[1]);
-        textEmail.setText(datuak[2]);
-        editJaiotzeData.setText(datuak[3]);
+        erabiltzaileLogeatuta = FirebaseAuth.getInstance().getCurrentUser();
+        Log.e("erabiltzaileLogeatuta", erabiltzaileLogeatuta.toString());
 
-
+        if (erabiltzaileLogeatuta != null) {
+            String email = erabiltzaileLogeatuta.getEmail();
+            if (email != null) {
+                datuakLortuPorEmail(email);
+            }else {
+                Log.e("Erabiltzailea", "Erabiltzailea ez dago logeatuta");
+            }
+        }
 
         btnItxiSaioa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,24 +124,22 @@ public class PerfilFragment extends Fragment {
         return true;
     }
 
-    private String[] datuakLortu(String id){
-        String[] datuak = new String[4];
-        db.collection("erabiltzaileak").document(id)
+    private void datuakLortuPorEmail(String email){
+        db.collection("erabiltzaileak")
+                .whereEqualTo("mail", email)
                 .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        datuak[0] = documentSnapshot.getString("izena");
-                        datuak[1] = documentSnapshot.getString("abizena");
-                        datuak[2] = documentSnapshot.getString("mail");
-                        datuak[3] = documentSnapshot.getString("jaiotzeData");
-
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
+                        txtIzena.setText(document.getString("izena"));
+                        txtAbizenak.setText(document.getString("abizena"));
+                        textEmail.setText(document.getString("mail"));
+                        String data = DataFuntzioak.timestampToString(document.getTimestamp("jaiotzedata"));
+                        editJaiotzeData.setText(data);
                     } else {
                         Log.d("Firestore", "Ez dago erabiltzaile hori");
                     }
-                });
-
-        return datuak;
-
+                })
+                .addOnFailureListener(e -> Log.e("Firestore", "Errorea datuak lortzen", e));
     }
-
 }
