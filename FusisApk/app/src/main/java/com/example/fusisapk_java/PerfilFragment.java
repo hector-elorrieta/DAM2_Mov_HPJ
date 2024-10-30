@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -24,85 +26,86 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class PerfilFragment extends Fragment {
-    private EditText txtIzena, txtAbizenak,
-            editJaiotzeData;
+    private EditText txtIzena, txtAbizenak, editJaiotzeData;
     private TextView txtEmail;
-    private Button btnAtzera,btnItxiSaioa;
+    private Button btnAtzera, btnItxiSaioa, btnGorde;
     private FirebaseAuth auth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseUser erabiltzaileLogeatuta;
+    private boolean datosModificados = false;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+
         txtIzena = view.findViewById(R.id.textIzena);
         txtAbizenak = view.findViewById(R.id.textAbizena);
         txtEmail = view.findViewById(R.id.textEmail);
         editJaiotzeData = view.findViewById(R.id.textDate);
-        Button btnAtzera = view.findViewById(R.id.btnAtzera);
-        Button btnItxiSaioa = view.findViewById(R.id.btnItxiSaioa);
-        Button btnGorde = view.findViewById(R.id.btnGorde);
+        btnAtzera = view.findViewById(R.id.btnAtzera);
+        btnItxiSaioa = view.findViewById(R.id.btnItxiSaioa);
+        btnGorde = view.findViewById(R.id.btnGorde);
 
+        btnGorde.setEnabled(false);
 
         erabiltzaileLogeatuta = FirebaseAuth.getInstance().getCurrentUser();
-        Log.e("erabiltzaileLogeatuta", erabiltzaileLogeatuta.toString());
-
         if (erabiltzaileLogeatuta != null) {
             String email = erabiltzaileLogeatuta.getEmail();
             if (email != null) {
                 datuakLortuPorEmail(email);
-            }else {
+            } else {
                 Log.e("Erabiltzailea", "Erabiltzailea ez dago logeatuta");
             }
         }
 
-        btnItxiSaioa.setOnClickListener(new View.OnClickListener() {
+        btnItxiSaioa.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            LoginFragment loginFragment = new LoginFragment();
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, loginFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
+
+        btnAtzera.setOnClickListener(v -> {
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
+
+        // TextWatcher para detectar cambios en los campos
+        TextWatcher textWatcher = new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                LoginFragment loginFragment = new LoginFragment();
-                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, loginFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                datosModificados = true;
+                btnGorde.setEnabled(true);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        };
+
+        txtIzena.addTextChangedListener(textWatcher);
+        txtAbizenak.addTextChangedListener(textWatcher);
+        editJaiotzeData.addTextChangedListener(textWatcher);
+
+        btnGorde.setOnClickListener(v -> {
+            if (datosModificados && izenaValidatu() & abizenakValidatu() & jaiotzeDataValidatu()) {
+                editarDatosPerfil();
+                Log.d("Validación", "Todos los datos son válidos. Guardando...");
+                datosModificados = false;
+                btnGorde.setEnabled(false);
+            } else {
+                Log.e("Validación", "Hay errores en el formulario o no se han hecho cambios.");
             }
         });
 
-        btnAtzera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                HomeFragment homeFragment = new HomeFragment();
-                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-//                transaction.replace(R.id.fragment_container, homeFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-        });
-
-        btnGorde.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (izenaValidatu() & abizenakValidatu() & jaiotzeDataValidatu()) {
-                    String izena = txtIzena.getText().toString().trim();
-                    String abizenak = txtAbizenak.getText().toString().trim();
-                    Timestamp jaiotzeData = DataFuntzioak.stringToTimestamp(editJaiotzeData.getText().toString());
-                    editarDatosPerfil();
-                    Log.d("Validación", "Todos los datos son válidos. Guardando...");
-                } else {
-                    Log.e("Validación", "Hay errores en el formulario.");
-                }
-            }
-        });
         return view;
-
-
-
     }
-
-
 
     private void editarDatosPerfil() {
         String izena = txtIzena.getText().toString();
@@ -120,70 +123,46 @@ public class PerfilFragment extends Fragment {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
-
                         String documentId = queryDocumentSnapshots.getDocuments().get(0).getId();
                         db.collection("erabiltzaileak").document(documentId)
                                 .update(erabiltzaileEguneratua)
-                                .addOnSuccessListener(aVoid ->
-                                        Toast.makeText(getContext(), "Datos actualizados correctamente", Toast.LENGTH_SHORT).show())
-                                .addOnFailureListener(e ->
-                                        Toast.makeText(getContext(), "Error al actualizar datos", Toast.LENGTH_SHORT).show());
+                                .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Datos actualizados correctamente", Toast.LENGTH_SHORT).show())
+                                .addOnFailureListener(e -> Toast.makeText(getContext(), "Error al actualizar datos", Toast.LENGTH_SHORT).show());
                     } else {
                         Toast.makeText(getContext(), "Usuario no encontrado", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(e ->
-                        Toast.makeText(getContext(), "Error al buscar usuario", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(getContext(), "Error al buscar usuario", Toast.LENGTH_SHORT).show());
     }
 
+    private boolean izenaValidatu() {
+        String izena = txtIzena.getText().toString();
+        if (izena.isEmpty()) {
+            txtIzena.setError("Izena sartu behar duzu");
+            return false;
+        }
+        return true;
+    }
 
+    private boolean abizenakValidatu() {
+        String abizenak = txtAbizenak.getText().toString();
+        if (abizenak.isEmpty()) {
+            txtAbizenak.setError("Abizenak sartu behar dituzu");
+            return false;
+        }
+        return true;
+    }
 
+    private boolean jaiotzeDataValidatu() {
+        String jaiotzeData = editJaiotzeData.getText().toString();
+        if (jaiotzeData.isEmpty()) {
+            editJaiotzeData.setError("Jaiotze data sartu behar duzu");
+            return false;
+        }
+        return true;
+    }
 
-                    private boolean izenaValidatu(){
-                        String izena = txtIzena.getText().toString();
-                        if(izena.isEmpty()){
-                            txtIzena.setError("Izena sartu behar duzu");
-                            return false;
-                        }
-                        return true;
-                    }
-
-                    private boolean abizenakValidatu(){
-                        String abizenak = txtAbizenak.getText().toString();
-                        if(abizenak.isEmpty()){
-                            txtAbizenak.setError("Abizenak sartu behar dituzu");
-                            return false;
-                        }
-                        return true;
-                    }
-
-                    private boolean emailaValidatu(){
-                        String email = txtEmail.getText().toString();
-                        if(email.isEmpty()){
-                            txtEmail.setError("Emaila sartu behar duzu");
-                            return false;
-                        }
-                        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                            txtEmail.setError("Emaila okerra");
-                            return false;
-                        }
-                        return true;
-                    }
-
-                    private boolean jaiotzeDataValidatu(){
-                        String jaiotzeData = editJaiotzeData.getText().toString();
-                        if(jaiotzeData.isEmpty()){
-                            editJaiotzeData.setError("Jaiotze data sartu behar duzu");
-                            return false;
-                        }
-                        return true;
-                    }
-
-
-
-
-
-    private void datuakLortuPorEmail(String email){
+    private void datuakLortuPorEmail(String email) {
         db.collection("erabiltzaileak")
                 .whereEqualTo("mail", email)
                 .get()
@@ -201,7 +180,4 @@ public class PerfilFragment extends Fragment {
                 })
                 .addOnFailureListener(e -> Log.e("Firestore", "Errorea datuak lortzen", e));
     }
-
-
-
 }
