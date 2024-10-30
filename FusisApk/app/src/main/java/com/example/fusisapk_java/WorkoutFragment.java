@@ -9,9 +9,13 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 public class WorkoutFragment extends Fragment {
+
+    private Button btnWorkout;
+    private Button btnHistoriala;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -19,6 +23,8 @@ public class WorkoutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_workout, container, false);
 
         CardView linkprofila = view.findViewById(R.id.cardViewProfila);
+        btnWorkout = view.findViewById(R.id.btnWorkout);
+        btnHistoriala = view.findViewById(R.id.btnHistoriala);
 
         linkprofila.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +37,10 @@ public class WorkoutFragment extends Fragment {
 
             }
         });
+
+
+
+
 
 
         return view;
