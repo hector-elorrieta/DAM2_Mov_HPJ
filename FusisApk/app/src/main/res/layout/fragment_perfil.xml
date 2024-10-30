@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logo">
 
-            <TextView
+            <EditText
                 android:id="@+id/textIzena"
                 android:layout_width="320dp"
                 android:layout_height="60dp"
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/textAbizena"
                 android:layout_width="320dp"
                 android:layout_height="60dp"
@@ -69,9 +69,9 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:background="#FBFBFB"
-                android:gravity="center|start|left"
                 android:fontFamily="@font/akshar"
-                android:hint="@string/email"
+                android:gravity="center|start|left"
+                android:hint="@string/jaiotzedata"
                 android:inputType="text|textNoSuggestions"
                 android:paddingStart="20px"
                 android:shadowColor="#292929"
@@ -89,8 +89,8 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:background="#FBFBFB"
-                android:gravity="center|start|left"
                 android:fontFamily="@font/akshar"
+                android:gravity="center|start|left"
                 android:hint="@string/email"
                 android:inputType="text|textNoSuggestions"
                 android:paddingStart="20px"
