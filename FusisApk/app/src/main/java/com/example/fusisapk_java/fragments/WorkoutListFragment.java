@@ -1,4 +1,4 @@
-package com.example.fusisapk_java;
+package com.example.fusisapk_java.fragments;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.fusisapk_java.R;
 
 public class WorkoutListFragment extends Fragment {
 

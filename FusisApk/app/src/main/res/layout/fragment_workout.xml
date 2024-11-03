@@ -7,7 +7,7 @@
     android:background="#2D2D2D"
     android:backgroundTint="#2D2D2D"
     android:backgroundTintMode="add"
-    tools:context=".WorkoutFragment">
+    tools:context=".fragments.WorkoutFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

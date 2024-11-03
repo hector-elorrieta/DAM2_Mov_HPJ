@@ -23,8 +23,7 @@ public class Erabiltzaile {
         this.mota = mota;
     }
 
-    public Erabiltzaile(String izena, String pasahitza, String abizenak, String email, Timestamp jaiotzeData,
-                        String mota, String erabiltzailea) {
+    public Erabiltzaile(String izena, String abizenak, String email, Timestamp jaiotzeData, String mota, String pasahitza, String erabiltzailea) {
         this.izena = izena;
         this.pasahitza = pasahitza;
         this.abizena = abizenak;

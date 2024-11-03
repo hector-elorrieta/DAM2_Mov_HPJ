@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#2D313A"
     android:backgroundTint="#2D313A"
-    tools:context=".EntrenamenduFragment">
+    tools:context=".fragments.EntrenamenduFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

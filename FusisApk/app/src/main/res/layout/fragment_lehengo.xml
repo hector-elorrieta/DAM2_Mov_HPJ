@@ -7,7 +7,7 @@
     android:background="#000000"
     android:backgroundTint="@color/black"
     android:backgroundTintMode="add"
-    tools:context=".LehengoFragment">
+    tools:context=".fragments.LehengoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
