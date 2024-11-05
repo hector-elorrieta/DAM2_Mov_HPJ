@@ -42,14 +42,17 @@ public class LoginFragment extends Fragment {
         email = view.findViewById(R.id.textErabiltzailea);
         pasahitza = view.findViewById(R.id.textPasahitza);
 
+        email.setText("");
+        pasahitza.setText("");
+
         // Cargar los datos si el archivo existe
         DBFuntzioak dbFuntzioak = new DBFuntzioak(getContext());
         cargarDatosGuardados();
 
         Button loginButton = view.findViewById(R.id.btnJarraitu);
         loginButton.setOnClickListener(v -> {
-            String mail =  String.valueOf(email);  // Reemplaza con el valor real
-            String password = String.valueOf(pasahitza);     // Reemplaza con el valor real
+            String mail =  email.getText().toString();
+            String password = pasahitza.getText().toString();
 
             // Llama a logIn pasando el FragmentManager del fragmento
             dbFuntzioak.logIn(mail, password, getParentFragmentManager());

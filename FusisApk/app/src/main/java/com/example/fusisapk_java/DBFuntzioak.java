@@ -105,6 +105,9 @@ public class DBFuntzioak {
 
     // Método de inicio de sesión, aceptando Activity como parámetro
     public void logIn(String mail, String pasahitza, FragmentManager fragmentManager) {
+
+        Log.e("Email", mail);
+
         if (mail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
             Toast.makeText(context, "Email formatoa ez dago ondo", Toast.LENGTH_SHORT).show();
             return;
