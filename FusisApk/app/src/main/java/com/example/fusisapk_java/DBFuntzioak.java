@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.example.fusisapk_java.fragments.LoginFragment;
+import com.google.firebase.firestore.QuerySnapshot;
 
 
 import java.io.FileInputStream;
@@ -36,6 +37,8 @@ public class DBFuntzioak {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private Context context;
+
+    AldagaiOrokorrak aldagaiOrokorrak = new AldagaiOrokorrak();
 
     // Constructor para inicializar FirebaseAuth, FirebaseFirestore, y el contexto
     public DBFuntzioak(Context context) {
@@ -83,6 +86,7 @@ public class DBFuntzioak {
                             erabiltzaileBerria.put("mota", mota);
                             erabiltzaileBerria.put("pasahitza", pasahitza);
                             erabiltzaileBerria.put("jaiotzedata", jaiotzeData);
+                            erabiltzaileBerria.put("maila", "Hasierakoa");
 
                             db.collection("erabiltzaileak").document(erabiltzaileBerria.get("erabiltzailea").toString())
                                     .set(erabiltzaileBerria)
@@ -97,16 +101,13 @@ public class DBFuntzioak {
                                         }
                                     });
                         } else {
-                            Toast.makeText(context, "Errorea erabiltzailea erregistratzean", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Ezin da email hori erabili", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
-    // Método de inicio de sesión, aceptando Activity como parámetro
     public void logIn(String mail, String pasahitza, FragmentManager fragmentManager) {
-
-        Log.e("Email", mail);
 
         if (mail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
             Toast.makeText(context, "Email formatoa ez dago ondo", Toast.LENGTH_SHORT).show();
@@ -133,9 +134,12 @@ public class DBFuntzioak {
                         Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+        aldagaiOrokorrak.erabiltzaileLogueatuta = new Erabiltzaile(mail, pasahitza);
+        datuakBete();
+
     }
 
-    // Verificación del usuario en Firestore
     private void egiaztatuFirebase(FirebaseUser user) {
         db.collection("erabiltzaileak").document(user.getEmail()).get()
                 .addOnCompleteListener(task -> {
@@ -143,6 +147,34 @@ public class DBFuntzioak {
                         DocumentSnapshot document = task.getResult();
                     } else {
                         Log.e("Firestore", "Error al obtener documento", task.getException());
+                    }
+                });
+    }
+
+    private void datuakBete() {
+        db.collection("erabiltzaileak")
+                .whereEqualTo("mail", aldagaiOrokorrak.erabiltzaileLogueatuta.getMail())
+                .get()
+                .addOnCompleteListener(task -> {
+                    String userEmail = aldagaiOrokorrak.erabiltzaileLogueatuta.getMail();
+                    Log.d("Firestore", "Buscando usuario con email: " + userEmail);
+
+                    if (task.isSuccessful()) {
+                        QuerySnapshot querySnapshot = task.getResult();
+
+                        if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                            DocumentSnapshot document = querySnapshot.getDocuments().get(0);
+                            Log.d("Firestore", "Documento encontrado para el usuario: " + document.getId());
+
+                            // Rellenar datos del usuario logueado con verificación de null
+                            aldagaiOrokorrak.erabiltzaileLogueatuta.setIzena(document.getString("izena"));
+                            aldagaiOrokorrak.erabiltzaileLogueatuta.setAbizena(document.getString("abizena"));
+                            aldagaiOrokorrak.erabiltzaileLogueatuta.setJaiotzeData(document.getTimestamp("jaiotzedata"));
+                            aldagaiOrokorrak.erabiltzaileLogueatuta.setMota(document.getString("mota"));
+                            aldagaiOrokorrak.erabiltzaileLogueatuta.setErabiltzailea(document.getString("erabiltzailea"));
+                            aldagaiOrokorrak.erabiltzaileLogueatuta.setMaila(document.getString("maila"));
+
+                        }
                     }
                 });
     }

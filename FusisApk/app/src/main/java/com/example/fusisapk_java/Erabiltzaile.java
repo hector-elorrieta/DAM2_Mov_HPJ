@@ -13,6 +13,12 @@ public class Erabiltzaile {
     private String pasahitza;
     private String erabiltzailea;
 
+    public Erabiltzaile (String mail, String pasahitza) {
+        this.mail = mail;
+        this.pasahitza = pasahitza;
+    }
+
+
     public Erabiltzaile(String izena, String abizenak, String email, Timestamp jaiotzeData
     , String maila, String mota) {
         this.izena = izena;

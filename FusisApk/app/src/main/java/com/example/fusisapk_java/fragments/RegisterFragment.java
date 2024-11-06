@@ -107,6 +107,11 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
                 Erabiltzaile erabiltzaile = new Erabiltzaile(izena, abizenak, email, jaiotzeData,
                         mota, pasahitza, erabiltzailea);
                 dbFuntzioak.erregistroEgin(erabiltzaile);
+                LoginFragment loginFragment = new LoginFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, loginFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 

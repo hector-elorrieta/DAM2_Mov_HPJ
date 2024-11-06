@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import  com.example.fusisapk_java.DBFuntzioak;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class LoginFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CheckBox checkBoxGogoratu;
-    private TextView email, pasahitza;
+    private TextView textEmail, textPasahitza;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -39,23 +40,21 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         mAuth = FirebaseAuth.getInstance();
         checkBoxGogoratu = view.findViewById(R.id.checkBoxGogoratu);
-        email = view.findViewById(R.id.textErabiltzailea);
-        pasahitza = view.findViewById(R.id.textPasahitza);
+        textEmail = view.findViewById(R.id.textErabiltzailea);
+        textPasahitza = view.findViewById(R.id.textPasahitza);
 
-        email.setText("");
-        pasahitza.setText("");
-
-        // Cargar los datos si el archivo existe
         DBFuntzioak dbFuntzioak = new DBFuntzioak(getContext());
-        cargarDatosGuardados();
+
+        // Datuak kargatu .dat fitxategitik
+        datuakKargatu();
 
         Button loginButton = view.findViewById(R.id.btnJarraitu);
         loginButton.setOnClickListener(v -> {
-            String mail =  email.getText().toString();
-            String password = pasahitza.getText().toString();
+            String mail =  textEmail.getText().toString();
+            String password = textPasahitza.getText().toString();
 
-            // Llama a logIn pasando el FragmentManager del fragmento
             dbFuntzioak.logIn(mail, password, getParentFragmentManager());
+            gordeDatuakCheckbox(mail, password);
         });
 
 
@@ -72,32 +71,44 @@ public class LoginFragment extends Fragment {
     }
 
     // Guardar usuario y contraseña en un archivo .dat si el checkbox está marcado
-    public void guardarDatosSiMarcado(String mail, String pasahitza) {
+    public void gordeDatuakCheckbox(String mail, String pasahitza) {
         if (checkBoxGogoratu.isChecked()) {
-            try (FileOutputStream fos = getActivity().openFileOutput("loginData.dat", Context.MODE_PRIVATE);
+            try (FileOutputStream fos = getActivity().
+                    openFileOutput("files\\loginData.dat",
+                            Context.MODE_PRIVATE);
                  ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(mail);
                 oos.writeObject(pasahitza);
-                Toast.makeText(getContext(), "Datos guardados para inicio automático", Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
-                Log.e("LoginFragment", "Error al guardar datos", e);
+                Log.e("LoginFragment", "Error datuak gordetzean", e);
+            }
+        } else {
+            // Si el CheckBox no está marcado, elimina el archivo y limpia los campos
+            File file = new File(getActivity().getFilesDir(), "files\\loginData.dat");
+            if (file.exists()) {
+                if (file.delete()) {
+                    Log.d("LoginFragment", "Datuak ezabatuta");
+                } else {
+                    Log.e("LoginFragment", "Errorea datuak ezabatzean");
+                }
+            }
+            textEmail.setText("");
+            textPasahitza.setText("");
+        }
+    }
+
+    public void datuakKargatu() {
+        if (textEmail != null && textPasahitza != null && checkBoxGogoratu != null) {
+            try (FileInputStream fis = getActivity().openFileInput("files\\loginData.dat");
+                 ObjectInputStream ois = new ObjectInputStream(fis)) {
+                String savedEmail = (String) ois.readObject();
+                String savedPassword = (String) ois.readObject();
+                textEmail.setText(savedEmail);
+                textPasahitza.setText(savedPassword);
+                checkBoxGogoratu.setChecked(true);
+            } catch (IOException | ClassNotFoundException e) {
+                Log.d("LoginFragment", "Ez daude datuak", e);
             }
         }
     }
-
-    // Cargar datos guardados si el archivo .dat existe y marcar el checkbox
-    public void cargarDatosGuardados() {
-        try (FileInputStream fis = getActivity().openFileInput("loginData.dat");
-             ObjectInputStream ois = new ObjectInputStream(fis)) {
-            String savedEmail = (String) ois.readObject();
-            String savedPassword = (String) ois.readObject();
-            email.setText(savedEmail);
-            pasahitza.setText(savedPassword);
-            checkBoxGogoratu.setChecked(true);
-        } catch (IOException | ClassNotFoundException e) {
-            Log.d("LoginFragment", "No se encontraron datos guardados", e);
-        }
-    }
-
-
 }
