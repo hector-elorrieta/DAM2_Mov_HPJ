@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +15,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fusisapk_java.AldagaiOrokorrak;
 import com.example.fusisapk_java.DataFuntzioak;
+import com.example.fusisapk_java.Erabiltzaile;
 import com.example.fusisapk_java.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -30,14 +29,14 @@ public class PerfilFragment extends Fragment {
     private EditText txtIzena, txtAbizenak, editJaiotzeData;
     private TextView txtEmail;
     private Button btnAtzera, btnItxiSaioa, btnGorde;
-    private FirebaseAuth auth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirebaseUser erabiltzaileLogeatuta;
-    private boolean datosModificados = false;
+    private boolean datuAldatutak = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+
+        Erabiltzaile logueatuta = AldagaiOrokorrak.erabiltzaileLogueatuta;
 
         txtIzena = view.findViewById(R.id.textIzena);
         txtAbizenak = view.findViewById(R.id.textAbizena);
@@ -49,15 +48,11 @@ public class PerfilFragment extends Fragment {
 
         btnGorde.setEnabled(false);
 
-        erabiltzaileLogeatuta = FirebaseAuth.getInstance().getCurrentUser();
-        if (erabiltzaileLogeatuta != null) {
-            String email = erabiltzaileLogeatuta.getEmail();
-            if (email != null) {
-                datuakLortuPorEmail(email);
-            } else {
-                Log.e("Erabiltzailea", "Erabiltzailea ez dago logeatuta");
-            }
-        }
+        txtIzena.setText(logueatuta.getIzena());
+        txtAbizenak.setText(logueatuta.getAbizena());
+        txtEmail.setText(logueatuta.getMail());
+        editJaiotzeData.setText(DataFuntzioak.timestampToString(logueatuta.getJaiotzeData()));
+
 
         btnItxiSaioa.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
@@ -74,14 +69,14 @@ public class PerfilFragment extends Fragment {
             transaction.commit();
         });
 
-        // TextWatcher para detectar cambios en los campos
+        // TextWatcher aldatzen den bakoitzean, datuak aldatu direla jakiteko
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                datosModificados = true;
+                datuAldatutak = true;
                 btnGorde.setEnabled(true);
             }
 
@@ -94,20 +89,17 @@ public class PerfilFragment extends Fragment {
         editJaiotzeData.addTextChangedListener(textWatcher);
 
         btnGorde.setOnClickListener(v -> {
-            if (datosModificados && izenaValidatu() & abizenakValidatu() & jaiotzeDataValidatu()) {
-                editarDatosPerfil();
-                Log.d("Validación", "Todos los datos son válidos. Guardando...");
-                datosModificados = false;
+            if (datuAldatutak && izenaValidatu() & abizenakValidatu() & jaiotzeDataValidatu()) {
+                datuakEditatu();
+                datuAldatutak = false;
                 btnGorde.setEnabled(false);
-            } else {
-                Log.e("Validación", "Hay errores en el formulario o no se han hecho cambios.");
             }
         });
 
         return view;
     }
 
-    private void editarDatosPerfil() {
+    private void datuakEditatu() {
         String izena = txtIzena.getText().toString();
         String abizenak = txtAbizenak.getText().toString();
         String email = txtEmail.getText().toString();
@@ -126,13 +118,16 @@ public class PerfilFragment extends Fragment {
                         String documentId = queryDocumentSnapshots.getDocuments().get(0).getId();
                         db.collection("erabiltzaileak").document(documentId)
                                 .update(erabiltzaileEguneratua)
-                                .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Datos actualizados correctamente", Toast.LENGTH_SHORT).show())
-                                .addOnFailureListener(e -> Toast.makeText(getContext(), "Error al actualizar datos", Toast.LENGTH_SHORT).show());
+                                .addOnSuccessListener(aVoid -> Toast.makeText(getContext(),
+                            "Datos actualizados correctamente", Toast.LENGTH_SHORT).show());
+
                     } else {
-                        Toast.makeText(getContext(), "Usuario no encontrado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Ez da erabiltzailea aurkitu",
+                                Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(e -> Toast.makeText(getContext(), "Error al buscar usuario", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(getContext(), "Error",
+                        Toast.LENGTH_SHORT).show());
     }
 
     private boolean izenaValidatu() {
@@ -160,24 +155,5 @@ public class PerfilFragment extends Fragment {
             return false;
         }
         return true;
-    }
-
-    private void datuakLortuPorEmail(String email) {
-        db.collection("erabiltzaileak")
-                .whereEqualTo("mail", email)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
-                        txtIzena.setText(document.getString("izena"));
-                        txtAbizenak.setText(document.getString("abizena"));
-                        txtEmail.setText(document.getString("mail"));
-                        String data = DataFuntzioak.timestampToString(document.getTimestamp("jaiotzedata"));
-                        editJaiotzeData.setText(data);
-                    } else {
-                        Log.d("Firestore", "Ez dago erabiltzaile hori");
-                    }
-                })
-                .addOnFailureListener(e -> Log.e("Firestore", "Errorea datuak lortzen", e));
     }
 }

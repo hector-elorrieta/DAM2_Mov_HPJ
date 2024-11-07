@@ -15,6 +15,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fusisapk_java.AldagaiOrokorrak;
+import com.example.fusisapk_java.Erabiltzaile;
 import com.example.fusisapk_java.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;

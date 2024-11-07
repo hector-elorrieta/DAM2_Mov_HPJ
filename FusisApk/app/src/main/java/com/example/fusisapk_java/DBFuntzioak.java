@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,15 +19,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.example.fusisapk_java.fragments.LoginFragment;
-import com.google.firebase.firestore.QuerySnapshot;
 
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -125,20 +118,30 @@ public class DBFuntzioak {
                         egiaztatuFirebase(user);
 
                         Toast.makeText(context, "Ondo logueatu sara", Toast.LENGTH_SHORT).show();
-                        WorkoutFragment workoutFragment = new WorkoutFragment();
-                        FragmentTransaction transaction = fragmentManager.beginTransaction();
-                        transaction.replace(R.id.fragment_container, workoutFragment);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
+
+                        // Llamamos a datuakBete con un callback que se ejecutará cuando los datos se hayan cargado
+                        datuakBete(success -> {
+                            if (success) {
+                                // Los datos están listos, ahora podemos cargar el fragmento
+                                WorkoutFragment workoutFragment = new WorkoutFragment();
+                                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                                transaction.replace(R.id.fragment_container, workoutFragment);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+                            } else {
+                                Toast.makeText(context, "Error al cargar los datos", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     } else {
                         Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
 
+        // Guarda el usuario logueado temporalmente
         aldagaiOrokorrak.erabiltzaileLogueatuta = new Erabiltzaile(mail, pasahitza);
-        datuakBete();
-
     }
+
 
     private void egiaztatuFirebase(FirebaseUser user) {
         db.collection("erabiltzaileak").document(user.getEmail()).get()
@@ -151,32 +154,71 @@ public class DBFuntzioak {
                 });
     }
 
-    private void datuakBete() {
+    public void datuakBete(OnDataLoadCallback callback) {
         db.collection("erabiltzaileak")
                 .whereEqualTo("mail", aldagaiOrokorrak.erabiltzaileLogueatuta.getMail())
                 .get()
                 .addOnCompleteListener(task -> {
-                    String userEmail = aldagaiOrokorrak.erabiltzaileLogueatuta.getMail();
-                    Log.d("Firestore", "Buscando usuario con email: " + userEmail);
-
-                    if (task.isSuccessful()) {
-                        QuerySnapshot querySnapshot = task.getResult();
-
-                        if (querySnapshot != null && !querySnapshot.isEmpty()) {
-                            DocumentSnapshot document = querySnapshot.getDocuments().get(0);
-                            Log.d("Firestore", "Documento encontrado para el usuario: " + document.getId());
-
-                            // Rellenar datos del usuario logueado con verificación de null
-                            aldagaiOrokorrak.erabiltzaileLogueatuta.setIzena(document.getString("izena"));
-                            aldagaiOrokorrak.erabiltzaileLogueatuta.setAbizena(document.getString("abizena"));
-                            aldagaiOrokorrak.erabiltzaileLogueatuta.setJaiotzeData(document.getTimestamp("jaiotzedata"));
-                            aldagaiOrokorrak.erabiltzaileLogueatuta.setMota(document.getString("mota"));
-                            aldagaiOrokorrak.erabiltzaileLogueatuta.setErabiltzailea(document.getString("erabiltzailea"));
-                            aldagaiOrokorrak.erabiltzaileLogueatuta.setMaila(document.getString("maila"));
-
-                        }
+                    if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()) {
+                        DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                        aldagaiOrokorrak.erabiltzaileLogueatuta.setIzena(document.getString("izena"));
+                        aldagaiOrokorrak.erabiltzaileLogueatuta.setAbizena(document.getString("abizena"));
+                        aldagaiOrokorrak.erabiltzaileLogueatuta.setJaiotzeData(document.getTimestamp("jaiotzedata"));
+                        aldagaiOrokorrak.erabiltzaileLogueatuta.setMota(document.getString("mota"));
+                        aldagaiOrokorrak.erabiltzaileLogueatuta.setErabiltzailea(document.getString("erabiltzailea"));
+                        aldagaiOrokorrak.erabiltzaileLogueatuta.setMaila(document.getString("maila"));
+                        callback.onDataLoaded(true);
+                    } else {
+                        callback.onDataLoaded(false);
                     }
                 });
     }
+
+    // Callback egiaztatzen du Erabiltzailea ondo logueatu dela eta datuak kargatu direla
+    public interface OnDataLoadCallback {
+        void onDataLoaded(boolean success);
+    }
+
+    public void getWorkoutList(OnWorkoutListLoadedCallback callback) {
+        final ArrayList<Workout> workoutList = new ArrayList<>();
+        db.collection("workouts")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot document : task.getResult()) {
+                            String izena = document.getString("izena");
+                            int denbora = document.getLong("denboraT(min)").intValue();
+                            String bideoa = document.getString("link");
+                            String maila = document.getString("maila");
+                            ArrayList<Ariketa> ariketak = new ArrayList<>();
+                            ArrayList<HashMap<String, Object>> ariketaList =
+                                    (ArrayList<HashMap<String, Object>>) document.get("ariketak");
+
+                            if (ariketaList != null) {
+                                for (HashMap<String, Object> ariketa : ariketaList) {
+                                    String documentId = document.getId();
+                                    int ariketaDenbora = ((Long) ariketa.get("denbora(min)")).intValue();
+                                    String ariketaImg = (String) ariketa.get("linka");
+                                    ariketak.add(new Ariketa(documentId, ariketaDenbora, ariketaImg));
+                                }
+                            }
+
+                            workoutList.add(new Workout(izena, denbora, bideoa, maila, ariketak));
+                        }
+                        if (callback != null) {
+                            callback.onWorkoutListLoaded(workoutList);
+                        }
+                    } else {
+                        Log.e("Firestore", "Error al obtener documentos", task.getException());
+                    }
+                });
+    }
+
+
+
+    public interface OnWorkoutListLoadedCallback {
+        void onWorkoutListLoaded(ArrayList<Workout> workouts);
+    }
+
 }
 
