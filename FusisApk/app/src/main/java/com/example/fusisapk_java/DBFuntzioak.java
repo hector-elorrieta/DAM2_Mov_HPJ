@@ -51,16 +51,19 @@ public class DBFuntzioak {
         Timestamp jaiotzeData = erabiltzaile.getJaiotzeData();
 
         if (pasahitza.length() < 6 || pasahitza.length() > 16) {
-            Toast.makeText(context, "Pasahitza 6 eta 16 karaktere artean egon behar da", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Pasahitza 6 eta 16 karaktere artean egon behar da",
+                                                                    Toast.LENGTH_SHORT).show();
             return;
         }
         if (email == null || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(context, "Sartu baliozko posta helbide bat", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Sartu baliozko posta helbide bat",
+                                                                    Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (izena.isEmpty() || abizenak.isEmpty() || erabiltzailea.isEmpty() || pasahitza.isEmpty()) {
-            Toast.makeText(context, "Derrigorrezko eremu guztiak bete behar dira", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Derrigorrezko eremu guztiak bete behar dira",
+                                                                    Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -81,20 +84,26 @@ public class DBFuntzioak {
                             erabiltzaileBerria.put("jaiotzedata", jaiotzeData);
                             erabiltzaileBerria.put("maila", "Hasierakoa");
 
-                            db.collection("erabiltzaileak").document(erabiltzaileBerria.get("erabiltzailea").toString())
+                            db.collection("erabiltzaileak").document
+                                        (erabiltzaileBerria.get("erabiltzailea").toString())
                                     .set(erabiltzaileBerria)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(context, "Erabiltzailea erregistratu da", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context,
+                                            "Erabiltzailea erregistratu da",
+                                                Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(context, "Errorea Firestore-n erabiltzailea gordetzean", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context,
+                                            "Errorea Firestore-n erabiltzailea gordetzean",
+                                                    Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
                         } else {
-                            Toast.makeText(context, "Ezin da email hori erabili", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Ezin da email hori erabili",
+                                                                        Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -119,7 +128,8 @@ public class DBFuntzioak {
 
                         Toast.makeText(context, "Ondo logueatu sara", Toast.LENGTH_SHORT).show();
 
-                        // Llamamos a datuakBete con un callback que se ejecutará cuando los datos se hayan cargado
+                        // Llamamos a datuakBete con un callback que se ejecutará cuando los
+                        // datos se hayan cargado
                         datuakBete(success -> {
                             if (success) {
                                 // Los datos están listos, ahora podemos cargar el fragmento
@@ -129,7 +139,8 @@ public class DBFuntzioak {
                                 transaction.addToBackStack(null);
                                 transaction.commit();
                             } else {
-                                Toast.makeText(context, "Error al cargar los datos", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Error al cargar los datos",
+                                                                        Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -149,7 +160,8 @@ public class DBFuntzioak {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                     } else {
-                        Log.e("Firestore", "Error al obtener documento", task.getException());
+                        Log.e("Firestore", "Error al obtener documento",
+                                                                            task.getException());
                     }
                 });
     }
@@ -161,12 +173,18 @@ public class DBFuntzioak {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()) {
                         DocumentSnapshot document = task.getResult().getDocuments().get(0);
-                        aldagaiOrokorrak.erabiltzaileLogueatuta.setIzena(document.getString("izena"));
-                        aldagaiOrokorrak.erabiltzaileLogueatuta.setAbizena(document.getString("abizena"));
-                        aldagaiOrokorrak.erabiltzaileLogueatuta.setJaiotzeData(document.getTimestamp("jaiotzedata"));
-                        aldagaiOrokorrak.erabiltzaileLogueatuta.setMota(document.getString("mota"));
-                        aldagaiOrokorrak.erabiltzaileLogueatuta.setErabiltzailea(document.getString("erabiltzailea"));
-                        aldagaiOrokorrak.erabiltzaileLogueatuta.setMaila(document.getString("maila"));
+                        aldagaiOrokorrak.erabiltzaileLogueatuta.setIzena
+                                                        (document.getString("izena"));
+                        aldagaiOrokorrak.erabiltzaileLogueatuta.setAbizena
+                                                        (document.getString("abizena"));
+                        aldagaiOrokorrak.erabiltzaileLogueatuta.setJaiotzeData
+                                                        (document.getTimestamp("jaiotzedata"));
+                        aldagaiOrokorrak.erabiltzaileLogueatuta.setMota
+                                                        (document.getString("mota"));
+                        aldagaiOrokorrak.erabiltzaileLogueatuta.setErabiltzailea
+                                                        (document.getString("erabiltzailea"));
+                        aldagaiOrokorrak.erabiltzaileLogueatuta.setMaila
+                                                        (document.getString("maila"));
                         callback.onDataLoaded(true);
                     } else {
                         callback.onDataLoaded(false);
@@ -208,8 +226,6 @@ public class DBFuntzioak {
                         if (callback != null) {
                             callback.onWorkoutListLoaded(workoutList);
                         }
-                    } else {
-                        Log.e("Firestore", "Error al obtener documentos", task.getException());
                     }
                 });
     }

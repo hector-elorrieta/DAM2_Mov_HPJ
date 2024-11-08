@@ -14,9 +14,6 @@ import java.util.ArrayList;
 
 public class WorkoutAdapter extends ArrayAdapter<Workout> {
 
-    AldagaiOrokorrak aldagaiOrokorrak = new AldagaiOrokorrak();
-    Erabiltzaile logueatuta = aldagaiOrokorrak.erabiltzaileLogueatuta;
-
     public WorkoutAdapter(Context context, ArrayList<Workout> workouts) {
         super(context, 0, workouts);
     }
@@ -27,27 +24,18 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.workout_item, parent, false);
         }
 
+
+
         Workout workout = getItem(position);
 
         TextView textWorkoutName = convertView.findViewById(R.id.textWorkoutName);
         TextView textWorkoutDuration = convertView.findViewById(R.id.textWorkoutDuration);
         TextView textWorkoutLevel = convertView.findViewById(R.id.textWorkoutLevel);
 
-        if (logueatuta.getMaila().equalsIgnoreCase("Hasierakoa")) {
-            if (workout.getMaila().equalsIgnoreCase("Hasierakoa")) {
-                textWorkoutName.setText(workout.getIzena());
-                textWorkoutDuration.setText("Denbora: " + workout.getDenbora() + " min");
-                textWorkoutLevel.setText("Maila: " + workout.getMaila());
-                Log.e("Hasierakoa", logueatuta.getMaila());
-            }
-        } else if (logueatuta.getMaila().equalsIgnoreCase("Erdimailakoa")) {
-            if (workout.getMaila().equalsIgnoreCase("Hasierakoa") || workout.getMaila().equalsIgnoreCase("Erdimailakoa")) {
-                textWorkoutName.setText(workout.getIzena());
-                textWorkoutDuration.setText("Denbora: " + workout.getDenbora() + " min");
-                textWorkoutLevel.setText("Maila: " + workout.getMaila());
-            }
-        }
-            return convertView;
-        }
+        textWorkoutName.setText(workout.getIzena());
+        textWorkoutDuration.setText("Denbora: " + workout.getDenbora() + " min");
+        textWorkoutLevel.setText("Maila: " + workout.getMaila());
 
+        return convertView;
+    }
 }

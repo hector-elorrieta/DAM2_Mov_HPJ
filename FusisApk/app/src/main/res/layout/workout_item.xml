@@ -9,7 +9,6 @@
         android:id="@+id/textWorkoutName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre del Workout"
         android:textSize="18sp"
         android:textColor="#000000"/>
 
@@ -17,7 +16,6 @@
         android:id="@+id/textWorkoutDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Duración: 30 min"
         android:textSize="14sp"
         android:textColor="#666666"/>
 
@@ -25,7 +23,6 @@
         android:id="@+id/textWorkoutLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nivel: Intermedio"
         android:textSize="14sp"
         android:textColor="#666666"/>
 </LinearLayout>

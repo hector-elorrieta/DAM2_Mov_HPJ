@@ -74,7 +74,7 @@ public class WorkoutFragment extends Fragment {
                 textWorkErabiltzaile.setText(logeatuta.getErabiltzailea());
                 textWorkMaila.setText("Maila: " + logeatuta.getMaila());
             } else {
-                Toast.makeText(getContext(), "Error al cargar los datos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
             }
         });
 
