@@ -110,13 +110,13 @@ public class DBFuntzioak {
     }
 
     public void logIn(String mail, String pasahitza, FragmentManager fragmentManager) {
-
-        if (mail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
+        if (mail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(mail).matches() ||
+                !mail.contains("@") || !mail.contains(".") || !mail.equals(mail.toLowerCase())) {
             Toast.makeText(context, "Email formatoa ez dago ondo", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (pasahitza.isEmpty()) {
-            Toast.makeText(context, "Sartu pasahitza", Toast.LENGTH_SHORT).show();
+        if (pasahitza.isEmpty() || pasahitza.length() < 6) {
+            Toast.makeText(context, "Pasahitza okerra", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -145,7 +145,7 @@ public class DBFuntzioak {
                         });
 
                     } else {
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Datuak okerrak", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -205,7 +205,7 @@ public class DBFuntzioak {
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot document : task.getResult()) {
                             String izena = document.getString("izena");
-                            int denbora = document.getLong("denboraT(min)").intValue();
+                            int denbora = document.getLong("denbora").intValue();
                             String bideoa = document.getString("link");
                             String maila = document.getString("maila");
                             ArrayList<Ariketa> ariketak = new ArrayList<>();

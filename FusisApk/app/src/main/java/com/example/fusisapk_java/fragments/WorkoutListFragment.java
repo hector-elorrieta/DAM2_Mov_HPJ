@@ -2,6 +2,7 @@ package com.example.fusisapk_java.fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ public class WorkoutListFragment extends Fragment {
         Button btnHasierakoa = view.findViewById(R.id.btnHasierako);
         Button btnErdimailakoa = view.findViewById(R.id.btnErdikoa);
         Button btnAurreratua = view.findViewById(R.id.btnAurreratu);
+        Button btnAtzera = view.findViewById(R.id.buttonAtzera);
 
         Erabiltzaile logueatuta = aldagaiOrokorrak.erabiltzaileLogueatuta;
 
@@ -48,6 +50,14 @@ public class WorkoutListFragment extends Fragment {
             Log.e("Maila", logueatuta.getMaila());
 
         }
+
+        btnAtzera.setOnClickListener(v -> {
+            WorkoutFragment workoutFragment = new WorkoutFragment();
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, workoutFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
 
         dbFuntzioak.getWorkoutList(new DBFuntzioak.OnWorkoutListLoadedCallback() {
             @Override

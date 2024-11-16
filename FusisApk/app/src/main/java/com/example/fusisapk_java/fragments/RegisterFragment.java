@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,14 +100,73 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
                 String email = textEmail.getText().toString().trim();
                 String pasahitza = txtPasahitza.getText().toString().trim();
                 String mota = spinnerMota.getSelectedItem().toString();
-                // Data bezala jaso eta Firebase-en gordetzeko formatuan pasatzen da.
-                Timestamp jaiotzeData =
-                        DataFuntzioak.stringToTimestamp(editJaiotzeData.getText().toString());
-                dbFuntzioak = new DBFuntzioak(requireContext());  // Pasa el contexto al constructor
+                String jaiotzeDataString = editJaiotzeData.getText().toString().trim();
 
-                Erabiltzaile erabiltzaile = new Erabiltzaile(izena, abizenak, email, jaiotzeData,
-                        mota, pasahitza, erabiltzailea);
+                // Validaciones
+                if (izena.isEmpty() || izena.length() < 2) {
+                    Toast.makeText(requireContext(),
+                            "Izena gutxienez 2 karaktere izan behar ditu.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (abizenak.isEmpty() || abizenak.length() < 2) {
+                    Toast.makeText(requireContext(),
+                            "Abizenak gutxienez 2 karaktere izan behar ditu.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (erabiltzailea.isEmpty() || !erabiltzailea.equals(erabiltzailea.toLowerCase())) {
+                    Toast.makeText(requireContext(),
+                            "Erabiltzailea ezin du letra larriak izan eta ezin da " +
+                                    "hutsik egon.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches() ||
+                        !email.equals(email.toLowerCase())) {
+                    Toast.makeText(requireContext(),
+                            "Email ez da baliozkoa edo baimendua.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (pasahitza.isEmpty() || pasahitza.length() < 6 ||
+                        pasahitza.equals(pasahitza.toUpperCase())) {
+                    Toast.makeText(requireContext(),
+                            "Pasahitzak gutxienez 6 karaktere izan behar ditu eta " +
+                                    "ezin du guztia majuskulaz izan.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (jaiotzeDataString.isEmpty()) {
+                    Toast.makeText(requireContext(), "Jaiotze data ezin da hutsik egon.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Timestamp jaiotzeData = DataFuntzioak.stringToTimestamp(jaiotzeDataString);
+                if (jaiotzeData == null) {
+                    Toast.makeText(requireContext(), "Jaiotze data ez da baliozkoa.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (mota.equalsIgnoreCase("Aukeratu")) {
+                    Toast.makeText(requireContext(), "Aukeratu mota bat.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Crear objeto Erabiltzaile y registrar
+                Erabiltzaile erabiltzaile = new Erabiltzaile(izena, abizenak, email,
+                        jaiotzeData, mota, pasahitza, erabiltzailea);
+                dbFuntzioak = new DBFuntzioak(requireContext());
                 dbFuntzioak.erregistroEgin(erabiltzaile);
+
+                // Redirigir al fragmento de login
                 LoginFragment loginFragment = new LoginFragment();
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container, loginFragment);
@@ -114,6 +174,7 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
                 transaction.commit();
             }
         });
+
 
         return view;
     }
