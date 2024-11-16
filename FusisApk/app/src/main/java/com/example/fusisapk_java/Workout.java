@@ -8,14 +8,12 @@ public class Workout {
     private int denbora;
     private String bideoa;
     private String maila;
-    private ArrayList<Ariketa> ariketak;
 
-    public Workout(String izena, int denbora, String bideoa, String maila, ArrayList<Ariketa> ariketak) {
+    public Workout(String izena, int denbora, String bideoa, String maila) {
         this.izena = izena;
         this.denbora = denbora;
         this.bideoa = bideoa;
         this.maila = maila;
-        this.ariketak = ariketak;
     }
 
     public String getIzena() {
@@ -49,17 +47,4 @@ public class Workout {
     public void setMaila(String maila) {
         this.maila = maila;
     }
-
-    public ArrayList<Ariketa> getAriketak() {
-        return ariketak;
-    }
-
-    public void setAriketak(ArrayList<Ariketa> ariketak) {
-        this.ariketak = ariketak;
-    }
-
-    public void addAriketa(Ariketa ariketa) {
-        ariketak.add(ariketa);
-    }
-
 }

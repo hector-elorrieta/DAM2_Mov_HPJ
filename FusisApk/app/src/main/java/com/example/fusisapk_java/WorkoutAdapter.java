@@ -24,8 +24,6 @@ public class WorkoutAdapter extends ArrayAdapter<Workout> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.workout_item, parent, false);
         }
 
-
-
         Workout workout = getItem(position);
 
         TextView textWorkoutName = convertView.findViewById(R.id.textWorkoutName);

@@ -17,12 +17,15 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DBFuntzioak {
@@ -185,6 +188,10 @@ public class DBFuntzioak {
                                                         (document.getString("erabiltzailea"));
                         aldagaiOrokorrak.erabiltzaileLogueatuta.setMaila
                                                         (document.getString("maila"));
+
+                        aldagaiOrokorrak.erabiltzaileLogueatuta.setHistorikoak
+                                (hartuHistorikoaErabiltzailea());
+
                         callback.onDataLoaded(true);
                     } else {
                         callback.onDataLoaded(false);
@@ -192,13 +199,99 @@ public class DBFuntzioak {
                 });
     }
 
-    // Callback egiaztatzen du Erabiltzailea ondo logueatu dela eta datuak kargatu direla
-    public interface OnDataLoadCallback {
-        void onDataLoaded(boolean success);
+    public ArrayList<Historikoa> hartuHistorikoaErabiltzailea() {
+        // Crear la lista de resultados
+        ArrayList<Historikoa> historikoList = new ArrayList<>();
+
+        // Consulta a la colección "erabiltzaileak"
+        db.collection("erabiltzaileak")
+                .whereEqualTo("mail", aldagaiOrokorrak.erabiltzaileLogueatuta.getMail())
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (task.getResult() != null && !task.getResult().isEmpty()) {
+                            QueryDocumentSnapshot document = (QueryDocumentSnapshot)
+                                    task.getResult().getDocuments().get(0);
+
+                            CollectionReference historikoaRef = document.getReference().
+                                    collection("historikoa");
+
+                            historikoaRef.get()
+                                    .addOnCompleteListener(historikoTask -> {
+                                        if (historikoTask.isSuccessful() &&
+                                                historikoTask.getResult() != null) {
+                                            for (QueryDocumentSnapshot historikoDoc :
+                                                    historikoTask.getResult()) {
+                                                String workoutName =
+                                                        historikoDoc.getString("workouts");
+                                                int denboraTotala =
+                                                        historikoDoc.getLong
+                                                                ("denbora_totala").intValue();
+                                                Timestamp data =
+                                                        historikoDoc.getTimestamp("data");
+                                                int egindakoDenbora =
+                                                        historikoDoc.getLong
+                                                                ("egindako_denbora").intValue();
+                                                int ehuneko =
+                                                        historikoDoc.getLong
+                                                                ("ehuneko").intValue();
+
+                                                Historikoa historikoa =
+                                                        new Historikoa(workoutName, data, egindakoDenbora, ehuneko);
+                                                historikoList.add(historikoa);
+                                            }
+
+                                        }
+                                    });
+                        } else {
+                            Log.e("Error", "No se encontró el usuario");
+                        }
+                    } else {
+                        // Manejo de errores de la consulta principal
+                        Log.e("Error","Error al obtener el usuario: " + task.getException().getMessage());
+                    }
+                });
+
+        return historikoList;
     }
 
-    public void getWorkoutList(OnWorkoutListLoadedCallback callback) {
-        final ArrayList<Workout> workoutList = new ArrayList<>();
+    public void egindakoWorkoutHistorikoan(OnWorkoutListLoadedCallback callback) {
+        ArrayList<Workout> workoutsEgindak = new ArrayList<>();
+        Erabiltzaile erabiltzaile = aldagaiOrokorrak.erabiltzaileLogueatuta;
+
+        ArrayList<Historikoa> historikoList = erabiltzaile.getHistorikoak();
+
+        getWorkoutList(workoutList -> {
+            if (workoutList != null) {
+                for (Historikoa historikoa : historikoList) {
+                    Log.e("Historikoa", "historikoa" + historikoa.getWorkoutIzena());
+
+                    for (Workout workout : workoutList) {
+                        Log.e("Workout", "Workout" + workout.getIzena());
+
+                        if (historikoa.getWorkoutIzena().equals(workout.getIzena())) {
+                            workoutsEgindak.add(workout);
+                        }
+                    }
+                }
+
+                Log.e("Workouts", workoutsEgindak.toString());
+
+                if (callback != null) {
+                    callback.onWorkoutListLoaded(workoutsEgindak);
+                }
+            } else {
+                Log.e("Error", "Error al cargar la lista de workouts");
+                if (callback != null) {
+                    callback.onWorkoutListLoaded(new ArrayList<>());
+                }
+            }
+        });
+    }
+
+    public void getWorkoutList(OnWorkoutListDataLoadCallback callback) {
+        ArrayList<Workout> workoutList = new ArrayList<>();
+
         db.collection("workouts")
                 .get()
                 .addOnCompleteListener(task -> {
@@ -208,33 +301,34 @@ public class DBFuntzioak {
                             int denbora = document.getLong("denbora").intValue();
                             String bideoa = document.getString("link");
                             String maila = document.getString("maila");
-                            ArrayList<Ariketa> ariketak = new ArrayList<>();
-                            ArrayList<HashMap<String, Object>> ariketaList =
-                                    (ArrayList<HashMap<String, Object>>) document.get("ariketak");
-
-                            if (ariketaList != null) {
-                                for (HashMap<String, Object> ariketa : ariketaList) {
-                                    String documentId = document.getId();
-                                    int ariketaDenbora = ((Long) ariketa.get("denbora(min)")).intValue();
-                                    String ariketaImg = (String) ariketa.get("linka");
-                                    ariketak.add(new Ariketa(documentId, ariketaDenbora, ariketaImg));
-                                }
-                            }
-
-                            workoutList.add(new Workout(izena, denbora, bideoa, maila, ariketak));
+                            workoutList.add(new Workout(izena, denbora, bideoa, maila));
                         }
+
                         if (callback != null) {
-                            callback.onWorkoutListLoaded(workoutList);
+                            callback.onWorkoutListDataLoaded(workoutList);
+                        }
+                    } else {
+                        if (callback != null) {
+                            callback.onWorkoutListDataLoaded(null);
                         }
                     }
                 });
     }
 
+    public interface OnWorkoutListDataLoadCallback {
+        void onWorkoutListDataLoaded(ArrayList<Workout> workoutList);
+    }
 
 
     public interface OnWorkoutListLoadedCallback {
         void onWorkoutListLoaded(ArrayList<Workout> workouts);
     }
+
+    // Callback egiaztatzen du Erabiltzailea ondo logueatu dela eta datuak kargatu direla
+    public interface OnDataLoadCallback {
+        void onDataLoaded(boolean success);
+    }
+
 
 }
 

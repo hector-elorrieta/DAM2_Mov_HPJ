@@ -2,6 +2,8 @@ package com.example.fusisapk_java;
 
 import com.google.firebase.Timestamp;
 
+import java.util.ArrayList;
+
 public class Erabiltzaile {
 
     private String izena;
@@ -12,6 +14,8 @@ public class Erabiltzaile {
     private String mota;
     private String pasahitza;
     private String erabiltzailea;
+    private ArrayList<Historikoa> historikoak;
+
 
     public Erabiltzaile (String mail, String pasahitza) {
         this.mail = mail;
@@ -101,5 +105,12 @@ public class Erabiltzaile {
 
     public void setErabiltzailea(String erabiltzailea) {
         this.erabiltzailea = erabiltzailea;
+    }
+
+    public ArrayList<Historikoa> getHistorikoak() {
+        return historikoak;
+    }
+    public void setHistorikoak(ArrayList<Historikoa> historikoak) {
+        this.historikoak = historikoak;
     }
 }

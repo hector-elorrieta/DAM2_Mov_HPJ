@@ -35,21 +35,16 @@ public class WorkoutListFragment extends Fragment {
         Button btnAurreratua = view.findViewById(R.id.btnAurreratu);
         Button btnAtzera = view.findViewById(R.id.buttonAtzera);
 
+        btnHasierakoa.setEnabled(false);
+        btnErdimailakoa.setEnabled(false);
+        btnAurreratua.setEnabled(false);
+
         Erabiltzaile logueatuta = aldagaiOrokorrak.erabiltzaileLogueatuta;
 
         ListView listView = view.findViewById(R.id.listView);
 
         Log.e("Maila", logueatuta.getMaila());
 
-        if (logueatuta.getMaila().equalsIgnoreCase("Hasierakoa")) {
-            btnErdimailakoa.setEnabled(false);
-            btnAurreratua.setEnabled(false);
-
-        }else if (logueatuta.getMaila().equalsIgnoreCase("Erdimailakoa")) {
-            btnAurreratua.setEnabled(false);
-            Log.e("Maila", logueatuta.getMaila());
-
-        }
 
         btnAtzera.setOnClickListener(v -> {
             WorkoutFragment workoutFragment = new WorkoutFragment();
@@ -59,7 +54,7 @@ public class WorkoutListFragment extends Fragment {
             transaction.commit();
         });
 
-        dbFuntzioak.getWorkoutList(new DBFuntzioak.OnWorkoutListLoadedCallback() {
+        dbFuntzioak.egindakoWorkoutHistorikoan(new DBFuntzioak.OnWorkoutListLoadedCallback() {
             @Override
             public void onWorkoutListLoaded(ArrayList<Workout> workouts) {
                 MailaFiltraketa filtraketa = new MailaFiltraketa(workouts);
@@ -70,6 +65,21 @@ public class WorkoutListFragment extends Fragment {
 
                 WorkoutAdapter workoutAdapter = new WorkoutAdapter(getContext(), hasierakoa);
                 listView.setAdapter(workoutAdapter);
+
+                for (Workout workout : workouts) {
+
+                    if (workout.getMaila().equalsIgnoreCase("Hasierakoa")) {
+                        btnHasierakoa.setEnabled(true);
+                    }
+
+                    if ((workout.getMaila().equalsIgnoreCase("Erdimailakoa"))) {
+                        btnErdimailakoa.setEnabled(true);
+                    }
+
+                    if ( workout.getMaila().equalsIgnoreCase("Aurreratua")) {
+                        btnAurreratua.setEnabled(true);
+                    }
+                }
 
                 btnHasierakoa.setOnClickListener(v -> {
                     WorkoutAdapter workoutAdapterHasierakoa = new WorkoutAdapter(getContext(), hasierakoa);

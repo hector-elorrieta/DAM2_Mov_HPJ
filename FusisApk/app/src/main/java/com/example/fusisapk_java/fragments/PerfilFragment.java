@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class PerfilFragment extends Fragment {
         btnItxiSaioa = view.findViewById(R.id.btnItxiSaioa);
         btnGorde = view.findViewById(R.id.btnGorde);
 
+        Button btnAtzera = view.findViewById(R.id.btnAtzera);
         btnGorde.setEnabled(false);
 
         txtIzena.setText(logueatuta.getIzena());
@@ -53,18 +55,19 @@ public class PerfilFragment extends Fragment {
         txtEmail.setText(logueatuta.getMail());
         editJaiotzeData.setText(DataFuntzioak.timestampToString(logueatuta.getJaiotzeData()));
 
+        btnAtzera.setOnClickListener(v -> {
+            WorkoutFragment workoutFragment = new WorkoutFragment();
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, workoutFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
 
         btnItxiSaioa.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             LoginFragment loginFragment = new LoginFragment();
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, loginFragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        });
-
-        btnAtzera.setOnClickListener(v -> {
-            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             transaction.addToBackStack(null);
             transaction.commit();
         });
