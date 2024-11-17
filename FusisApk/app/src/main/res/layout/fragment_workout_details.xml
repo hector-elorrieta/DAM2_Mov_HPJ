@@ -15,14 +15,11 @@
         android:textColorHint="#B0B0B0"
         android:background="#E6DFCF" />
 
-    <EditText
-        android:id="@+id/etLevel"
+    <Spinner
+        android:id="@+id/spinnerMaila"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nivel"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#B0B0B0"
-        android:background="#E6DFCF" />
+        android:layout_height="wrap_content" />
+
 
     <EditText
         android:id="@+id/Link"

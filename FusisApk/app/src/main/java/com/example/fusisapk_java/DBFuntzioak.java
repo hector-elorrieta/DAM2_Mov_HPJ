@@ -25,7 +25,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class DBFuntzioak {
@@ -315,7 +314,7 @@ public class DBFuntzioak {
         Map<String, Object> workoutData = new HashMap<>();
         workoutData.put("izena", workout.getIzena());
         workoutData.put("denbora", workout.getDenbora());
-        workoutData.put("bideoa", workout.getBideoa());
+        workoutData.put("link", workout.getLink());
         workoutData.put("maila", workout.getMaila());
 
         // Agregar el workout a Firestore

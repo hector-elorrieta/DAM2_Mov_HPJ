@@ -1,19 +1,18 @@
 package com.example.fusisapk_java;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Workout implements Serializable {
 
     private String izena;
     private int denbora;
-    private String bideoa;
+    private String link;
     private String maila;
 
     public Workout(String izena, int denbora, String bideoa, String maila) {
         this.izena = izena;
         this.denbora = denbora;
-        this.bideoa = bideoa;
+        this.link = bideoa;
         this.maila = maila;
     }
 
@@ -33,12 +32,12 @@ public class Workout implements Serializable {
         this.denbora = denbora;
     }
 
-    public String getBideoa() {
-        return bideoa;
+    public String getLink() {
+        return link;
     }
 
-    public void setBideoa(String bideoa) {
-        this.bideoa = bideoa;
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public String getMaila() {

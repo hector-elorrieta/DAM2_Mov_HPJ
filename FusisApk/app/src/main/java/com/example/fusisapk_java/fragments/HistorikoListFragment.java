@@ -97,7 +97,7 @@ public class HistorikoListFragment extends Fragment {
                     bundle.putString("izena", selectedWorkout.getIzena());
                     bundle.putString("denbora", String.valueOf(selectedWorkout.getDenbora()));
                     bundle.putString("maila", selectedWorkout.getMaila());
-                    bundle.putString("bideoa", selectedWorkout.getBideoa());
+                    bundle.putString("bideoa", selectedWorkout.getLink());
                     detailsFragment.setArguments(bundle);
 
                     FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
