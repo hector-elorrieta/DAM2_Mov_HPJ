@@ -34,8 +34,8 @@ android {
 
 dependencies {
     implementation("com.google.firebase:firebase-database:21.0.0")
-
     implementation(platform("com.google.firebase:firebase-bom:33.5.0"))
+
 
     implementation(libs.appcompat)
     implementation(libs.material)
