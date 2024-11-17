@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2D2D2D"
+    tools:context=".fragments.WorkoutListFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="353dp"
+            android:layout_height="580dp"
+            android:layout_marginBottom="112dp"
+            android:background="#E6DFCF"
+            android:contextClickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textWorkOutLista"
+            style="@android:style/Widget.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:breakStrategy="high_quality"
+            android:fontFamily="@font/akshar"
+            android:text="@string/workoutak"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textSize="48sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnAtzera"
+            android:layout_width="139dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="#2196F3"
+            android:backgroundTintMode="add"
+            android:text="@string/atzera"
+            app:iconTint="#03A9F4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/listView"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/btnHasierako"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="19dp"
+            android:backgroundTint="#2196F3"
+            android:text="@string/hasierakoa"
+            app:layout_constraintBottom_toTopOf="@+id/listView"
+            app:layout_constraintEnd_toStartOf="@+id/btnErdikoa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textWorkOutLista" />
+
+        <Button
+            android:id="@+id/btnAurreratu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="19dp"
+            android:backgroundTint="#2196F3"
+            android:text="@string/aurreratua"
+            app:layout_constraintBottom_toTopOf="@+id/listView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnErdikoa"
+            app:layout_constraintTop_toBottomOf="@+id/textWorkOutLista" />
+
+        <Button
+            android:id="@+id/btnErdikoa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="19dp"
+            android:backgroundTint="#2196F3"
+            android:text="@string/erdimailakoa"
+            app:layout_constraintBottom_toTopOf="@+id/listView"
+            app:layout_constraintEnd_toStartOf="@+id/btnAurreratu"
+            app:layout_constraintStart_toEndOf="@+id/btnHasierako"
+            app:layout_constraintTop_toBottomOf="@+id/textWorkOutLista" />
+
+        <Button
+            android:id="@+id/btnAddWorkout"
+            android:layout_width="160dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="51dp"
+            android:layout_marginBottom="30dp"
+            android:text="Añadir Workout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnAtzera"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/listView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

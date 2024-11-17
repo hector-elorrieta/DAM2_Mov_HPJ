@@ -25,6 +25,11 @@
     <string name="hasierakoa">Hasierakoa</string>
     <string name="erdimailakoa">Erdimailakoa</string>
     <string name="aurreratua">Aurreratua</string>
+    <string-array name="maila_options">
+        <item>Hasierakoa</item>
+        <item>Erdimailakoa</item>
+        <item>Aurrerakoa</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

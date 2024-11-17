@@ -22,8 +22,8 @@ import  com.example.fusisapk_java.DBFuntzioak;
 
 public class WorkoutFragment extends Fragment {
 
+    private Button btnHistorikoa;
     private Button btnWorkout;
-    private Button btnHistoriala;
     private TextView textWorkErabiltzaile, textWorkMaila;
 
     AldagaiOrokorrak aldagaiOrokorrak = new AldagaiOrokorrak();
@@ -35,8 +35,8 @@ public class WorkoutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_workout, container, false);
 
         CardView linkprofila = view.findViewById(R.id.cardViewProfila);
-        btnWorkout = view.findViewById(R.id.btnWorkout);
-        btnHistoriala = view.findViewById(R.id.btnHistoriala);
+        btnHistorikoa = view.findViewById(R.id.btnHistorikoa);
+        btnWorkout = view.findViewById(R.id.btnTrainerWorkout);
 
         Erabiltzaile logeatuta = aldagaiOrokorrak.erabiltzaileLogueatuta;
 
@@ -57,12 +57,12 @@ public class WorkoutFragment extends Fragment {
             }
         });
 
-        btnWorkout.setOnClickListener(new View.OnClickListener() {
+        btnHistorikoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HistorikoListFragment workoutListFragment = new HistorikoListFragment();
+                HistorikoListFragment historikoListFragment = new HistorikoListFragment();
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, workoutListFragment);
+                transaction.replace(R.id.fragment_container, historikoListFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
@@ -74,6 +74,17 @@ public class WorkoutFragment extends Fragment {
                 textWorkMaila.setText("Maila: " + logeatuta.getMaila());
             } else {
                 Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnWorkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WorkoutListFragment workoutListFragment = new WorkoutListFragment();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, workoutListFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 

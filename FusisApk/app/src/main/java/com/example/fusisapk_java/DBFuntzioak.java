@@ -307,6 +307,86 @@ public class DBFuntzioak {
                     }
                 });
     }
+    public boolean addWorkout(Workout workout) {
+        // Obtén una referencia a la colección "workouts" en Firestore
+        CollectionReference workoutsRef = db.collection("workouts");
+
+        // Crear un mapa con los datos del workout
+        Map<String, Object> workoutData = new HashMap<>();
+        workoutData.put("izena", workout.getIzena());
+        workoutData.put("denbora", workout.getDenbora());
+        workoutData.put("bideoa", workout.getBideoa());
+        workoutData.put("maila", workout.getMaila());
+
+        // Agregar el workout a Firestore
+        workoutsRef.add(workoutData)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("Workout", "Workout añadido correctamente");
+                    } else {
+                        Log.e("Workout", "Error al añadir el workout", task.getException());
+                    }
+                });
+
+        return true;  // Retorna true indicando que el workout fue guardado correctamente
+    }
+
+
+    public void removeWorkout(String workoutName, OnCompletionListener listener) {
+        if (workoutName == null || workoutName.isEmpty()) {
+            listener.onComplete(false);
+            return;
+        }
+
+        db.collection("workouts")
+                .whereEqualTo("izena", workoutName)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                        // Eliminar el primer documento que coincida
+                        task.getResult().getDocuments().get(0).getReference()
+                                .delete()
+                                .addOnSuccessListener(unused -> listener.onComplete(true))
+                                .addOnFailureListener(e -> listener.onComplete(false));
+                    } else {
+                        listener.onComplete(false);
+                    }
+                });
+    }
+
+    public void updateWorkout(String workoutName, Workout updatedWorkout, OnCompletionListener listener) {
+        if (workoutName == null || workoutName.isEmpty() || updatedWorkout == null) {
+            listener.onComplete(false);
+            return;
+        }
+
+        db.collection("workouts")
+                .whereEqualTo("izena", workoutName)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                        task.getResult().getDocuments().get(0).getReference()
+                                .set(updatedWorkout)
+                                .addOnSuccessListener(unused -> listener.onComplete(true))
+                                .addOnFailureListener(e -> listener.onComplete(false));
+                    } else {
+                        listener.onComplete(false);
+                    }
+                });
+    }
+
+
+
+
+
+
+
+
+
+
+    public interface OnCompletionListener {
+        void onComplete(boolean success);
+    }
 
     public interface OnWorkoutListDataLoadCallback {
         void onWorkoutListDataLoaded(ArrayList<Workout> workoutList);

@@ -25,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnHistoriala"
+            app:layout_constraintTop_toBottomOf="@+id/btnTrainerWorkout"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
@@ -79,35 +79,35 @@
             android:textColor="#FFFFFF"
             android:textColorLink="#FFFFFF"
             android:textSize="34sp"
-            app:layout_constraintBottom_toTopOf="@+id/btnWorkout"
+            app:layout_constraintBottom_toTopOf="@+id/btnHistorikoa"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textWorkErabiltzaile" />
 
         <Button
-            android:id="@+id/btnWorkout"
+            android:id="@+id/btnHistorikoa"
             android:layout_width="336dp"
             android:layout_height="58dp"
             android:layout_marginBottom="28dp"
             android:backgroundTint="#2196F3"
-            android:text="@string/workoutak"
+            android:text="@string/historiala"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/btnHistoriala"
+            app:layout_constraintBottom_toTopOf="@+id/btnTrainerWorkout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btnHistoriala"
+            android:id="@+id/btnTrainerWorkout"
             android:layout_width="336dp"
             android:layout_height="58dp"
             android:layout_marginTop="28dp"
             android:backgroundTint="#2196F3"
-            android:text="@string/historiala"
+            android:text="@string/workouts"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnWorkout" />
+            app:layout_constraintTop_toBottomOf="@+id/btnHistorikoa" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewProfila"

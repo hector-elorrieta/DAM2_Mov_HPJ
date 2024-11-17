@@ -1,8 +1,9 @@
 package com.example.fusisapk_java;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Workout {
+public class Workout implements Serializable {
 
     private String izena;
     private int denbora;

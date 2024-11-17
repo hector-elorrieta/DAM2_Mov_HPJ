@@ -1,0 +1,47 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etIzena"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Izena" />
+
+    <EditText
+        android:id="@+id/etDenbora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Denbora (min)"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/etBideoa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Bideoa (URL)" />
+
+    <Spinner
+        android:id="@+id/spinnerMaila"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:entries="@array/maila_options" />
+
+
+    <Button
+        android:id="@+id/btnGordeWorkout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gorde" />
+
+    <Button
+        android:id="@+id/btnAtzera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Atzera" />
+
+</LinearLayout>
