@@ -6,7 +6,6 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +60,7 @@ public class WorkoutFragment extends Fragment {
         btnWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WorkoutListFragment workoutListFragment = new WorkoutListFragment();
+                HistorikoListFragment workoutListFragment = new HistorikoListFragment();
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container, workoutListFragment);
                 transaction.addToBackStack(null);

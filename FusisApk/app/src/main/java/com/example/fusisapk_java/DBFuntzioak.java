@@ -224,9 +224,6 @@ public class DBFuntzioak {
                                                     historikoTask.getResult()) {
                                                 String workoutName =
                                                         historikoDoc.getString("workouts");
-                                                int denboraTotala =
-                                                        historikoDoc.getLong
-                                                                ("denbora_totala").intValue();
                                                 Timestamp data =
                                                         historikoDoc.getTimestamp("data");
                                                 int egindakoDenbora =
@@ -264,11 +261,7 @@ public class DBFuntzioak {
         getWorkoutList(workoutList -> {
             if (workoutList != null) {
                 for (Historikoa historikoa : historikoList) {
-                    Log.e("Historikoa", "historikoa" + historikoa.getWorkoutIzena());
-
                     for (Workout workout : workoutList) {
-                        Log.e("Workout", "Workout" + workout.getIzena());
-
                         if (historikoa.getWorkoutIzena().equals(workout.getIzena())) {
                             workoutsEgindak.add(workout);
                         }
@@ -318,7 +311,6 @@ public class DBFuntzioak {
     public interface OnWorkoutListDataLoadCallback {
         void onWorkoutListDataLoaded(ArrayList<Workout> workoutList);
     }
-
 
     public interface OnWorkoutListLoadedCallback {
         void onWorkoutListLoaded(ArrayList<Workout> workouts);

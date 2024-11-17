@@ -21,7 +21,7 @@ import com.example.fusisapk_java.WorkoutAdapter;
 
 import java.util.ArrayList;
 
-public class WorkoutListFragment extends Fragment {
+public class HistorikoListFragment extends Fragment {
     DBFuntzioak dbFuntzioak = new DBFuntzioak(getContext());
     AldagaiOrokorrak aldagaiOrokorrak = new AldagaiOrokorrak();
 
@@ -39,12 +39,7 @@ public class WorkoutListFragment extends Fragment {
         btnErdimailakoa.setEnabled(false);
         btnAurreratua.setEnabled(false);
 
-        Erabiltzaile logueatuta = aldagaiOrokorrak.erabiltzaileLogueatuta;
-
         ListView listView = view.findViewById(R.id.listView);
-
-        Log.e("Maila", logueatuta.getMaila());
-
 
         btnAtzera.setOnClickListener(v -> {
             WorkoutFragment workoutFragment = new WorkoutFragment();
@@ -63,7 +58,7 @@ public class WorkoutListFragment extends Fragment {
                 ArrayList<Workout> erdimailakoa = filtraketa.getErdimailakoa();
                 ArrayList<Workout> aurreratua = filtraketa.getAurreratua();
 
-                WorkoutAdapter workoutAdapter = new WorkoutAdapter(getContext(), hasierakoa);
+                WorkoutAdapter workoutAdapter = new WorkoutAdapter(getContext(), workouts);
                 listView.setAdapter(workoutAdapter);
 
                 for (Workout workout : workouts) {
@@ -82,17 +77,20 @@ public class WorkoutListFragment extends Fragment {
                 }
 
                 btnHasierakoa.setOnClickListener(v -> {
-                    WorkoutAdapter workoutAdapterHasierakoa = new WorkoutAdapter(getContext(), hasierakoa);
+                    WorkoutAdapter workoutAdapterHasierakoa = new WorkoutAdapter(getContext(),
+                            hasierakoa);
                     listView.setAdapter(workoutAdapterHasierakoa);
                 });
 
                 btnErdimailakoa.setOnClickListener(v -> {
-                    WorkoutAdapter workoutAdapterErdimailakoa = new WorkoutAdapter(getContext(), erdimailakoa);
+                    WorkoutAdapter workoutAdapterErdimailakoa = new WorkoutAdapter(getContext(),
+                                                                                    erdimailakoa);
                     listView.setAdapter(workoutAdapterErdimailakoa);
                 });
 
                 btnAurreratua.setOnClickListener(v -> {
-                    WorkoutAdapter workoutAdapterAurreratua = new WorkoutAdapter(getContext(), aurreratua);
+                    WorkoutAdapter workoutAdapterAurreratua = new WorkoutAdapter(getContext(),
+                                                                                    aurreratua);
                     listView.setAdapter(workoutAdapterAurreratua);
                 });
             }
