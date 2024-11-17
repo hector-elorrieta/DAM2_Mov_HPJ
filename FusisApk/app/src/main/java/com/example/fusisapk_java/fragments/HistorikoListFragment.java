@@ -60,36 +60,50 @@ public class HistorikoListFragment extends Fragment {
                 listView.setAdapter(workoutAdapter);
 
                 for (Workout workout : workouts) {
-
                     if (workout.getMaila().equalsIgnoreCase("Hasierakoa")) {
                         btnHasierakoa.setEnabled(true);
                     }
 
-                    if ((workout.getMaila().equalsIgnoreCase("Erdimailakoa"))) {
+                    if (workout.getMaila().equalsIgnoreCase("Erdimailakoa")) {
                         btnErdimailakoa.setEnabled(true);
                     }
 
-                    if ( workout.getMaila().equalsIgnoreCase("Aurreratua")) {
+                    if (workout.getMaila().equalsIgnoreCase("Aurreratua")) {
                         btnAurreratua.setEnabled(true);
                     }
                 }
 
                 btnHasierakoa.setOnClickListener(v -> {
-                    WorkoutAdapter workoutAdapterHasierakoa = new WorkoutAdapter(getContext(),
-                            hasierakoa);
+                    WorkoutAdapter workoutAdapterHasierakoa = new WorkoutAdapter(getContext(), hasierakoa);
                     listView.setAdapter(workoutAdapterHasierakoa);
                 });
 
                 btnErdimailakoa.setOnClickListener(v -> {
-                    WorkoutAdapter workoutAdapterErdimailakoa = new WorkoutAdapter(getContext(),
-                                                                                    erdimailakoa);
+                    WorkoutAdapter workoutAdapterErdimailakoa = new WorkoutAdapter(getContext(), erdimailakoa);
                     listView.setAdapter(workoutAdapterErdimailakoa);
                 });
 
                 btnAurreratua.setOnClickListener(v -> {
-                    WorkoutAdapter workoutAdapterAurreratua = new WorkoutAdapter(getContext(),
-                                                                                    aurreratua);
+                    WorkoutAdapter workoutAdapterAurreratua = new WorkoutAdapter(getContext(), aurreratua);
                     listView.setAdapter(workoutAdapterAurreratua);
+                });
+
+                listView.setOnItemClickListener((parent, view, position, id) -> {
+                    Workout selectedWorkout = (Workout) parent.getItemAtPosition(position);
+
+                    HistorikoDetailsFragment detailsFragment = new HistorikoDetailsFragment();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("izena", selectedWorkout.getIzena());
+                    bundle.putString("denbora", String.valueOf(selectedWorkout.getDenbora()));
+                    bundle.putString("maila", selectedWorkout.getMaila());
+                    bundle.putString("bideoa", selectedWorkout.getBideoa());
+                    detailsFragment.setArguments(bundle);
+
+                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container, detailsFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
                 });
             }
         });
