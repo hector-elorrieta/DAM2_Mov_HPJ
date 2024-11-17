@@ -21,15 +21,21 @@
     <string name="historiala">Zure historiala</string>
     <string name="maila">Maila: </string>
     <string name="Gorde">Gorde</string>
+    <string name="ezabatu">Ezabatu</string>
     <string name="workouts">Workout-ak</string>
     <string name="hasierakoa">Hasierakoa</string>
     <string name="erdimailakoa">Erdimailakoa</string>
     <string name="aurreratua">Aurreratua</string>
+    <string name="historikoak">Historikoak</string>
+    <string name="NOhistorikoak">Ez dago historikorik</string>
+    <string name="kudeatu">Workout kudeatu</string>
+    <string name="sartu">Gehitu Workout</string>
+    <string name="denbora">Denbora(seg)</string>
+    <string name="bideoaURL">Bideoa(URL)</string>
+
     <string-array name="maila_options">
         <item>Hasierakoa</item>
         <item>Erdimailakoa</item>
         <item>Aurrerakoa</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

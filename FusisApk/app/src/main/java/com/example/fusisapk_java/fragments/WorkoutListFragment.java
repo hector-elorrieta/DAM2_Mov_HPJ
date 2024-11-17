@@ -11,8 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.OptIn;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.media3.common.util.Log;
-import androidx.media3.common.util.UnstableApi;
 
 import com.example.fusisapk_java.DBFuntzioak;
 import com.example.fusisapk_java.R;

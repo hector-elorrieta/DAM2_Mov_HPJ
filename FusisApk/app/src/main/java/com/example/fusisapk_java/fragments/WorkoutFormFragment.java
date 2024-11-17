@@ -33,7 +33,6 @@ public class WorkoutFormFragment extends Fragment {
         btnGordeWorkout = view.findViewById(R.id.btnGordeWorkout);
         btnAtzera = view.findViewById(R.id.btnAtzera);
 
-        // Configurar el Spinner con las opciones
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 getContext(),
                 R.array.maila_options,
@@ -42,7 +41,6 @@ public class WorkoutFormFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMaila.setAdapter(adapter);
 
-        // Botón "Atzera"
         btnAtzera.setOnClickListener(v -> {
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, new WorkoutListFragment());
@@ -52,44 +50,57 @@ public class WorkoutFormFragment extends Fragment {
 
         DBFuntzioak db = new DBFuntzioak(getContext());
 
-        // Botón "Guardar"
         btnGordeWorkout.setOnClickListener(v -> {
-            // Capturar los datos del formulario
             String izena = etIzena.getText().toString().trim();
             String denboraStr = etDenbora.getText().toString().trim();
             String bideoa = etBideoa.getText().toString().trim();
-            String maila = spinnerMaila.getSelectedItem().toString(); // Obtener el valor seleccionado
 
-            // Verificar si todos los campos están llenos
+            String maila = spinnerMaila.getSelectedItem().toString();
+
+            if (maila.equals("Maila")) {
+                Toast.makeText(getContext(), "Maila bat aukeratu behar da", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             if (izena.isEmpty() || denboraStr.isEmpty() || bideoa.isEmpty()) {
-                Toast.makeText(getContext(), "Por favor, llena todos los campos", Toast.LENGTH_SHORT).show();
-            } else {
-                try {
-                    // Convertir denbora a int
-                    int denbora = Integer.parseInt(denboraStr);
+                Toast.makeText(getContext(), "Datu guztiak bete behar dira", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-                    // Crear un objeto Workout
-                    Workout newWorkout = new Workout(izena, denbora, bideoa, maila);
+            if (!isValidVideoUrl(bideoa)) {
+                Toast.makeText(getContext(), "Bideo URL balioduna sartu behar da", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-                    // Llamar al método para agregar el workout
-                    boolean isAdded = db.addWorkout(newWorkout);
-                    if (isAdded) {
-                        Toast.makeText(getContext(), "Workout guardado correctamente", Toast.LENGTH_SHORT).show();
-
-                        // Volver a la lista de workouts
-                        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragment_container, new WorkoutListFragment());
-                        transaction.addToBackStack(null);
-                        transaction.commit();
-                    } else {
-                        Toast.makeText(getContext(), "Hubo un error al guardar el workout", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (NumberFormatException e) {
-                    Toast.makeText(getContext(), "Por favor, ingresa un número válido para la duración", Toast.LENGTH_SHORT).show();
+            try {
+                int denbora = Integer.parseInt(denboraStr);
+                if (denbora <= 0) {
+                    Toast.makeText(getContext(), "Denbora positiboa izan behar da", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                Workout newWorkout = new Workout(izena, denbora, bideoa, maila);
+                boolean isGordeta = db.addWorkout(newWorkout);
+
+                if (isGordeta) {
+                    Toast.makeText(getContext(), "Workout ondo sartu da", Toast.LENGTH_SHORT).show();
+
+                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container, new WorkoutListFragment());
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                } else {
+                    Toast.makeText(getContext(), "Error datu-basean sartzean", Toast.LENGTH_SHORT).show();
+                }
+            } catch (NumberFormatException e) {
+                Toast.makeText(getContext(), "Denbora zenbakia izan behar da", Toast.LENGTH_SHORT).show();
             }
         });
 
         return view;
+    }
+
+    private boolean isValidVideoUrl(String url) {
+        return url != null && (url.startsWith("http://") || url.startsWith("https://"));
     }
 }

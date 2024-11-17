@@ -1,47 +1,124 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2D2D2D"
     android:orientation="vertical"
     android:padding="16dp">
-
-    <EditText
-        android:id="@+id/etIzena"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Izena" />
-
-    <EditText
-        android:id="@+id/etDenbora"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Denbora (min)"
-        android:inputType="number" />
-
-    <EditText
-        android:id="@+id/etBideoa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Bideoa (URL)" />
-
-    <Spinner
-        android:id="@+id/spinnerMaila"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:entries="@array/maila_options" />
 
 
     <Button
         android:id="@+id/btnGordeWorkout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Gorde" />
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#4CAF50"
+        android:text="@string/Gorde"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnAtzera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Atzera" />
+        android:layout_width="192dp"
+        android:layout_height="49dp"
+        android:backgroundTint="#2196F3"
+        android:text="@string/atzera"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnGordeWorkout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="340dp"
+        android:layout_height="575dp"
+        android:layout_marginBottom="92dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btnGordeWorkout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:id="@+id/etIzena"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FBFBFB"
+            android:gravity="center|start|left"
+            android:hint="@string/izena"
+            android:inputType="text|textNoSuggestions"
+            android:paddingStart="20px"
+            android:shadowColor="#292929"
+            android:textSize="24sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:id="@+id/etDenbora"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FBFBFB"
+            android:gravity="center|start|left"
+            android:hint="@string/denbora"
+            android:inputType="number"
+            android:paddingStart="20px"
+            android:shadowColor="#292929"
+            android:textSize="24sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:id="@+id/etBideoa"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FBFBFB"
+            android:gravity="center|start|left"
+            android:hint="@string/bideoaURL"
+            android:inputType="text|textNoSuggestions"
+            android:paddingStart="20px"
+            android:shadowColor="#292929"
+            android:textSize="24sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <Spinner
+            android:id="@+id/spinnerMaila"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FBFBFB"
+            android:backgroundTint="#FBFBFB"
+            android:entries="@array/maila_options" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textSartu"
+        style="@android:style/Widget.TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:breakStrategy="high_quality"
+        android:text="@string/sartu"
+        android:textColor="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

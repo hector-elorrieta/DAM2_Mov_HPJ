@@ -1,56 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2D2D2D"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#2D2D2D">
+    android:padding="16dp">
 
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textSartu"
+        style="@android:style/Widget.TextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Nombre"
+        android:breakStrategy="high_quality"
+        android:text="@string/kudeatu"
         android:textColor="#FFFFFF"
-        android:textColorHint="#B0B0B0"
-        android:background="#E6DFCF" />
+        android:textColorLink="#FFFFFF"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinnerMaila"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="378dp"
+        android:layout_height="646dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
+        <EditText
+            android:id="@+id/etIzena"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FBFBFB"
+            android:clickable="true"
+            android:gravity="center|start|left"
+            android:hint="@string/izena"
+            android:inputType="text|textNoSuggestions"
+            android:paddingStart="20px"
+            android:shadowColor="#292929"
+            android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/Link"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Link"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#B0B0B0"
-        android:background="#E6DFCF" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="18dp" />
 
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Guardar"
-        android:backgroundTint="#4CAF50"
-        android:textColor="#FFFFFF" />
+        <EditText
+            android:id="@+id/Link"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FBFBFB"
+            android:gravity="center|start|left"
+            android:hint="@string/bideoaURL"
+            android:inputType="text|textNoSuggestions"
+            android:paddingStart="20px"
+            android:shadowColor="#292929"
+            android:textSize="24sp" />
 
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Eliminar"
-        android:backgroundTint="#F44336"
-        android:textColor="#FFFFFF" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="18dp" />
 
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Atrás"
-        android:backgroundTint="#2196F3"
-        android:textColor="#FFFFFF" />
-</LinearLayout>
+        <Spinner
+            android:id="@+id/spinnerMaila"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FBFBFB"
+            android:backgroundTint="#FBFBFB"
+            android:entries="@array/maila_options" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="244dp" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#4CAF50"
+            android:text="@string/Gorde"
+            android:textColor="#FFFFFF" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="18dp" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F44336"
+            android:text="@string/ezabatu"
+            android:textColor="#FFFFFF" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="18dp" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#2196F3"
+            android:text="@string/atzera"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
