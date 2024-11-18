@@ -1,6 +1,8 @@
 package com.example.fusisapk_java.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -27,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class PerfilFragment extends Fragment {
@@ -59,14 +62,21 @@ public class PerfilFragment extends Fragment {
         editJaiotzeData.setText(DataFuntzioak.timestampToString(logueatuta.getJaiotzeData()));
 
         @SuppressLint("UseSwitchCompatOrMaterialCode") Switch darkModeSwitch =
-                                                        view.findViewById(R.id.switch_dark_mode);
+                view.findViewById(R.id.switch_dark_mode);
         darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                // Cambiar a modo oscuro
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             } else {
-                // Cambiar a modo claro
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        });
+
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch languageSwitch = view.findViewById(R.id.Hizkuntza);
+        languageSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                setLocale("es");
+            } else {
+                setLocale("");
             }
         });
 
@@ -137,7 +147,7 @@ public class PerfilFragment extends Fragment {
                         db.collection("erabiltzaileak").document(documentId)
                                 .update(erabiltzaileEguneratua)
                                 .addOnSuccessListener(aVoid -> Toast.makeText(getContext(),
-                            "Datos actualizados correctamente", Toast.LENGTH_SHORT).show());
+                                        "Datos actualizados correctamente", Toast.LENGTH_SHORT).show());
 
                     } else {
                         Toast.makeText(getContext(), "Ez da erabiltzailea aurkitu",
@@ -148,6 +158,25 @@ public class PerfilFragment extends Fragment {
                         Toast.LENGTH_SHORT).show());
     }
 
+    private void setLocale(String langCode) {
+        // Crear un nuevo Locale con el código de idioma (por ejemplo, "es" o "default")
+        Locale locale = new Locale(langCode);
+        Locale.setDefault(locale);
+
+        // Configurar el nuevo idioma en los recursos
+        Resources resources = getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+
+        // Actualizar la configuración global
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+
+        // Recargar el fragmento actual para aplicar los cambios
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, new PerfilFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
     private boolean izenaValidatu() {
         String izena = txtIzena.getText().toString();
         if (izena.isEmpty()) {

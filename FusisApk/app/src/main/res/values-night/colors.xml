@@ -3,7 +3,7 @@
 
     <color name="background">#000000</color>
     <color name="text">#FFFFFF</color>
-    <color name="buttonBackground">#2196F3</color>
+    <color name="buttonBackground">#3F51B5</color>
     <color name="switchTrack">#666666</color>
     <color name="switchThumb">#2196F3</color>
     <color name="black">#000000</color>
@@ -13,11 +13,17 @@
     <color name="backgroundAccent">#2196F3</color>
     <color name="textPrimary">#FFFFFF</color>
     <color name="textSecondary">#B0B0B0</color>
-    <color name="buttonBackgroundLogin">#474747</color>
+    <color name="buttonBackgroundLogin">#2B2B2B</color>
     <color name="buttonText">#FFFFFF</color>
     <color name="checkboxText">#FFFFFF</color>
     <color name="linkText">#ffffff</color>
     <color name="inputBackground">#474747</color>
     <color name="inputText">#FFFFFF</color>
     <color name="inputHint">#B0B0B0</color>
+
+    <color name="backgroundWorkout">#191919</color>
+    <color name="greenButton">#054407</color>
+    <color name="redButton">#840C04</color>
+    <color name="gehituBTN">#012E2B</color>
+
 </resources>

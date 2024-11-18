@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2D2D2D"
+    android:background="@color/backgroundWorkout"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -15,8 +15,8 @@
         android:layout_height="wrap_content"
         android:breakStrategy="high_quality"
         android:text="@string/kudeatu"
-        android:textColor="#FFFFFF"
-        android:textColorLink="#FFFFFF"
+        android:textColor="@color/buttonText"
+        android:textColorLink="@color/buttonText"
         android:textSize="48sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
             android:id="@+id/etIzena"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#FBFBFB"
+            android:background="@color/inputBackground"
             android:clickable="true"
             android:gravity="center|start|left"
             android:hint="@string/izena"
@@ -55,7 +55,7 @@
             android:id="@+id/Link"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#FBFBFB"
+            android:background="@color/inputBackground"
             android:gravity="center|start|left"
             android:hint="@string/bideoaURL"
             android:inputType="text|textNoSuggestions"
@@ -71,8 +71,8 @@
             android:id="@+id/spinnerMaila"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#FBFBFB"
-            android:backgroundTint="#FBFBFB"
+            android:background="@color/inputBackground"
+            android:backgroundTint="@color/inputBackground"
             android:entries="@array/maila_options" />
 
         <Space
@@ -83,9 +83,9 @@
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#4CAF50"
+            android:backgroundTint="@color/greenButton"
             android:text="@string/Gorde"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/buttonText" />
 
         <Space
             android:layout_width="match_parent"
@@ -95,9 +95,9 @@
             android:id="@+id/btnDelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#F44336"
+            android:backgroundTint="@color/redButton"
             android:text="@string/ezabatu"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/buttonText" />
 
         <Space
             android:layout_width="match_parent"
@@ -107,9 +107,9 @@
             android:id="@+id/btnBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#2196F3"
+            android:backgroundTint="@color/buttonBackground"
             android:text="@string/atzera"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/buttonText" />
 
     </LinearLayout>
 

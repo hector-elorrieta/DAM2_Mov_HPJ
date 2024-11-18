@@ -9,11 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#2D2D2D"
-        android:backgroundTint="@color/black"
-        android:backgroundTintMode="screen"
-        android:foregroundTint="#924343">
-
+        android:background="@color/backgroundWorkout">
 
         <TextView
             android:id="@+id/LinkErregistratu"
@@ -26,12 +22,10 @@
             android:gravity="center"
             android:minHeight="48dp"
             android:text="@string/loginhemen"
-            android:textColor="#2196F3"
-            android:textColorLink="#E63535"
+            android:textColor="@color/linkText"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
@@ -42,19 +36,15 @@
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.666"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textWorkOut"
-                style="@android:style/Widget.TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:breakStrategy="high_quality"
                 android:text="@string/erregistratu"
-                android:textColor="#FFFFFF"
-                android:textColorLink="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="48sp" />
 
             <Space
@@ -65,116 +55,95 @@
                 android:id="@+id/textDate"
                 android:layout_width="322dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="45dp"
-                android:layout_marginEnd="45dp"
                 android:layout_marginBottom="20dp"
-                android:background="#8D8D8D"
-                android:gravity="center|start|left"
+                android:background="@color/inputBackground"
+                android:gravity="center|start"
                 android:hint="@string/jaiotzedata"
                 android:inputType="date"
                 android:focusable="false"
                 android:clickable="true"
-                android:paddingStart="20px"
-                android:shadowColor="#292929"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#474343"
+                android:paddingStart="2dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/inputHint"
                 android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/textEmail"
-                android:layout_width="match_parent"
+                android:layout_width="322dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="45dp"
-                android:layout_marginEnd="45dp"
                 android:layout_marginBottom="20dp"
-                android:background="#8D8D8D"
-                android:gravity="center|start|left"
+                android:background="@color/inputBackground"
+                android:gravity="center|start"
                 android:hint="@string/email"
-                android:inputType="text|textEmailSubject|textNoSuggestions"
-                android:paddingStart="20px"
-                android:shadowColor="#292929"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#474343"
+                android:inputType="text|textEmailAddress"
+                android:paddingStart="2dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/inputHint"
                 android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/textErabiltzailea"
                 android:layout_width="322dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="45dp"
-                android:layout_marginEnd="45dp"
                 android:layout_marginBottom="20dp"
-                android:background="#8D8D8D"
-                android:gravity="center|start|left"
+                android:background="@color/inputBackground"
+                android:gravity="center|start"
                 android:hint="@string/textErabiltzailea"
-                android:inputType="text|textNoSuggestions"
-                android:paddingStart="20px"
-                android:shadowColor="#292929"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#474343"
+                android:inputType="text"
+                android:paddingStart="2dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/inputHint"
                 android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/textIzena"
                 android:layout_width="322dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="45dp"
-                android:layout_marginEnd="45dp"
                 android:layout_marginBottom="20dp"
-                android:background="#8D8D8D"
-                android:gravity="center|start|left"
+                android:background="@color/inputBackground"
+                android:gravity="center|start"
                 android:hint="@string/izena"
-                android:inputType="text|textPersonName|textNoSuggestions"
-                android:paddingStart="20px"
-                android:shadowColor="#292929"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#474343"
+                android:inputType="text"
+                android:paddingStart="2dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/inputHint"
                 android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/textAbizena"
                 android:layout_width="322dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="45dp"
-                android:layout_marginEnd="45dp"
                 android:layout_marginBottom="20dp"
-                android:background="#8D8D8D"
-                android:gravity="center|start|left"
+                android:background="@color/inputBackground"
+                android:gravity="center|start"
                 android:hint="@string/abizena"
-                android:inputType="text|textNoSuggestions"
-                android:paddingStart="20px"
-                android:shadowColor="#292929"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#474343"
+                android:inputType="text"
+                android:paddingStart="2dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/inputHint"
                 android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/textPasahitza"
                 android:layout_width="322dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="45dp"
-                android:layout_marginEnd="45dp"
                 android:layout_marginBottom="20dp"
-                android:background="#8D8D8D"
-                android:ems="10"
-                android:gravity="center|start|left"
+                android:background="@color/inputBackground"
+                android:gravity="center|start"
                 android:hint="@string/textPasahitza"
-                android:inputType="textPassword|textNoSuggestions"
-                android:paddingStart="20px"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#474343"
+                android:inputType="textPassword"
+                android:paddingStart="2dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/inputHint"
                 android:textSize="24sp" />
 
             <Spinner
                 android:id="@+id/spinnerMota"
                 android:layout_width="322dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="45dp"
-                android:layout_marginEnd="45dp"
-                android:background="#8D8D8D"
+                android:background="@color/inputBackground"
                 android:textSize="20sp"
-                android:gravity="left"
-                android:textColor="#FF0000"  />
+                android:textColor="@color/textSecondary" />
 
             <Space
                 android:layout_width="match_parent"
@@ -184,23 +153,17 @@
                 android:id="@+id/btnJarraitu"
                 android:layout_width="322dp"
                 android:layout_height="55dp"
-                android:backgroundTint="#2196F3"
-                android:backgroundTintMode="add"
+                android:backgroundTint="@color/buttonBackground"
                 android:text="@string/jarraitu"
-                android:textColorHint="#6D3F3F"
-                android:textColorLink="#100B0B"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
-
         </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="408dp"
             android:layout_height="125dp"
-            android:src="@drawable/logoblancotransparente_peque"
-            tools:layout_editor_absoluteX="2dp"
-            tools:layout_editor_absoluteY="-2dp" />
-
+            android:src="@drawable/logoblancotransparente_peque" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

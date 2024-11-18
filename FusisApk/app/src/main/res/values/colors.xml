@@ -19,4 +19,9 @@
     <color name="inputBackground">#FBFBFB</color>
     <color name="inputText">#000000</color>
     <color name="inputHint">#757575</color>
+
+    <color name="backgroundWorkout">#2D2D2D</color>
+    <color name="greenButton">#4CAF50</color>
+    <color name="redButton">#F44336</color>
+    <color name="gehituBTN">#009688</color>
 </resources>

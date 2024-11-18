@@ -19,6 +19,8 @@ import com.example.fusisapk_java.R;
 
 import  com.example.fusisapk_java.DBFuntzioak;
 
+import java.util.Objects;
+
 
 public class WorkoutFragment extends Fragment {
 
@@ -43,7 +45,12 @@ public class WorkoutFragment extends Fragment {
         textWorkErabiltzaile = view.findViewById(R.id.textWorkErabiltzaile);
         textWorkMaila = view.findViewById(R.id.textWorkMaila);
         textWorkErabiltzaile.setText(logeatuta.getErabiltzailea());
-        textWorkMaila.setText("Maila: " + logeatuta.getMaila());
+        textWorkMaila.setText(logeatuta.getMaila());
+
+        if (logeatuta.getMaila().equalsIgnoreCase("Bezeroa")
+                        || !Objects.equals(logeatuta.getMaila(), "Entrenatzailea")) {
+            btnWorkout.setVisibility(View.GONE);
+        }
 
         linkprofila.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +78,7 @@ public class WorkoutFragment extends Fragment {
         dbFuntzioak.datuakBete(success -> {
             if (success) {
                 textWorkErabiltzaile.setText(logeatuta.getErabiltzailea());
-                textWorkMaila.setText("Maila: " + logeatuta.getMaila());
+                textWorkMaila.setText(logeatuta.getMaila());
             } else {
                 Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
             }

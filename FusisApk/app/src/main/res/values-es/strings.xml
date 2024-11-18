@@ -3,5 +3,41 @@
     <string name="app_name">FusisApk_Java</string>
     <string name="etorri">¡Bienvenido!</string>
     <string name="jarraitu">Continuar</string>
-
+    <string name="textErabiltzailea">Usuario</string>
+    <string name="textPasahitza">Contraseña</string>
+    <string name="button">Entrar</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="erregistratuhemen">Regístrate aquí</string>
+    <string name="loginhemen">Inicia sesión aquí</string>
+    <string name="erregistratu">Registrar</string>
+    <string name="izena">Nombre</string>
+    <string name="abizena">Apellido</string>
+    <string name="email">Correo electrónico</string>
+    <string name="jaiotzedata">Fecha de nacimiento</string>
+    <string name="itxiSaioa">Cerrar sesión</string>
+    <string name="atzera">Atrás</string>
+    <string name="workout">Ejercicio</string>
+    <string name="ariketak">Ejercicios</string>
+    <string name="workoutak">Ejercicios</string>
+    <string name="historiala">Tu historial</string>
+    <string name="maila">Nivel: </string>
+    <string name="Gorde">Guardar</string>
+    <string name="ezabatu">Eliminar</string>
+    <string name="workouts">Ejercicios</string>
+    <string name="hasierakoa">Principiante</string>
+    <string name="erdimailakoa">Intermedio</string>
+    <string name="aurreratua">Avanzado</string>
+    <string name="historikoak">Historiales</string>
+    <string name="EzHistorikoak">No hay historial</string>
+    <string name="kudeatu">Gestionar ejercicios</string>
+    <string name="sartu">Añadir ejercicio</string>
+    <string name="denbora">Tiempo (seg)</string>
+    <string name="bideoaURL">Vídeo (URL)</string>
+    <string name="BeltzFormatua">Modo oscuro</string>
+    <string name="Hizkuntza">Euskera</string>
+    <string-array name="maila_options">
+        <item>Principiante</item>
+        <item>Intermedio</item>
+        <item>Avanzado</item>
+    </string-array>
 </resources>

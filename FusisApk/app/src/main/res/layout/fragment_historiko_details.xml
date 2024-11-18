@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2D2D2D"
+    android:background="@color/backgroundWorkout"
     tools:context=".fragments.HistorikoDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,8 +30,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Izena"
-                android:textColor="#FFFFFF"
-                android:textColorLink="#FFFFFF"
+                android:textColor="@color/white"
+                android:textColorLink="@color/white"
                 android:textSize="48sp"
                 android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Denbora"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="24sp" />
 
             <TextView
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Egindako denbora"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="24sp" />
 
             <TextView
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Data"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="24sp" />
 
             <TextView
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Maila"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="24sp" />
 
             <TextView
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Ehunekoa"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="24sp" />
 
             <TextView
@@ -88,7 +88,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:text="Bideoa ikusi"
-                android:textColor="#2196F3"
+                android:textColor="@color/linkText"
                 android:textSize="24sp" />
 
 
@@ -100,8 +100,9 @@
                 android:id="@+id/btnAtzera"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
-                android:backgroundTint="#2196F3"
+                android:backgroundTint="@color/buttonBackground"
                 android:text="@string/atzera"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

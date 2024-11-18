@@ -27,13 +27,13 @@
     <string name="erdimailakoa">Erdimailakoa</string>
     <string name="aurreratua">Aurreratua</string>
     <string name="historikoak">Historikoak</string>
-    <string name="NOhistorikoak">Ez dago historikorik</string>
+    <string name="EzHistorikoak">Ez dago historikorik</string>
     <string name="kudeatu">Workout kudeatu</string>
     <string name="sartu">Gehitu Workout</string>
     <string name="denbora">Denbora(seg)</string>
     <string name="bideoaURL">Bideoa(URL)</string>
     <string name="BeltzFormatua">Beltz modua</string>
-
+    <string name="Hizkuntza">Gazteleraz</string>
     <string-array name="maila_options">
         <item>Hasierakoa</item>
         <item>Erdimailakoa</item>
