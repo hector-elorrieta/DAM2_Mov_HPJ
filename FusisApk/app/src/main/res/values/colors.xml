@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="background">#FFFFFF</color> <!-- Fondo blanco para modo claro -->
+    <color name="text">#000000</color> <!-- Texto negro para modo claro -->
+    <color name="buttonBackground">#2196F3</color> <!-- Color del botón -->
+    <color name="switchTrack">#CCCCCC</color> <!-- Color del track del switch en modo claro -->
+    <color name="switchThumb">#2196F3</color> <!-- Color del thumb del switch -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="backgroundLogin">#2196F3</color> <!-- Fondo azul claro -->
+    <color name="backgroundAccent">#2196F3</color> <!-- Fondo azul claro -->
+    <color name="textPrimary">#000000</color> <!-- Texto negro -->
+    <color name="textSecondary">#757575</color> <!-- Texto gris oscuro -->
+    <color name="buttonBackgroundLogin">#474747</color> <!-- Fondo del botón -->
+    <color name="buttonText">#FFFFFF</color> <!-- Texto blanco en el botón -->
+    <color name="checkboxText">#000000</color> <!-- Texto del CheckBox -->
+    <color name="linkText">#0022FF</color> <!-- Color del texto de enlace -->
+    <color name="inputBackground">#FBFBFB</color> <!-- Fondo del EditText -->
+    <color name="inputText">#000000</color> <!-- Texto del EditText -->
+    <color name="inputHint">#757575</color> <!-- Texto de sugerencia en EditText -->
 </resources>

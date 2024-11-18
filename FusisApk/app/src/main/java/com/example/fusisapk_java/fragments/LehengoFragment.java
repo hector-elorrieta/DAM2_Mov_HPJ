@@ -1,9 +1,11 @@
 package com.example.fusisapk_java.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -11,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.example.fusisapk_java.R;
 
@@ -33,6 +37,17 @@ public class LehengoFragment extends Fragment {
                 transaction.replace(R.id.fragment_container, loginFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
+            }
+        });
+
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch darkModeSwitch = view.findViewById(R.id.switch_dark_mode);
+        darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // Cambiar a modo oscuro
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                // Cambiar a modo claro
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         });
 

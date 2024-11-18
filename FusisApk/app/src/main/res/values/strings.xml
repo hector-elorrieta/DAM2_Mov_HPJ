@@ -32,6 +32,7 @@
     <string name="sartu">Gehitu Workout</string>
     <string name="denbora">Denbora(seg)</string>
     <string name="bideoaURL">Bideoa(URL)</string>
+    <string name="BeltzFormatua">Beltz modua</string>
 
     <string-array name="maila_options">
         <item>Hasierakoa</item>
