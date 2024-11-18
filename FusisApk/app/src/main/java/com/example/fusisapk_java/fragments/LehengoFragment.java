@@ -40,17 +40,6 @@ public class LehengoFragment extends Fragment {
             }
         });
 
-        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch darkModeSwitch = view.findViewById(R.id.switch_dark_mode);
-        darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                // Cambiar a modo oscuro
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else {
-                // Cambiar a modo claro
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }
-        });
-
         return view;
     }
 }

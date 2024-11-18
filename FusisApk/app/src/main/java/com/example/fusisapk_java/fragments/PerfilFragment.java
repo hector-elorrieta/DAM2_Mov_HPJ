@@ -1,7 +1,9 @@
 package com.example.fusisapk_java.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +57,18 @@ public class PerfilFragment extends Fragment {
         txtAbizenak.setText(logueatuta.getAbizena());
         txtEmail.setText(logueatuta.getMail());
         editJaiotzeData.setText(DataFuntzioak.timestampToString(logueatuta.getJaiotzeData()));
+
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch darkModeSwitch =
+                                                        view.findViewById(R.id.switch_dark_mode);
+        darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // Cambiar a modo oscuro
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                // Cambiar a modo claro
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        });
 
         btnAtzera.setOnClickListener(v -> {
             WorkoutFragment workoutFragment = new WorkoutFragment();

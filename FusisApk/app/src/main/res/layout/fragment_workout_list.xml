@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:breakStrategy="high_quality"
-            android:fontFamily="@font/akshar"
+            android:fontFamily="sans-serif"
             android:text="@string/workoutak"
             android:textColor="#FFFFFF"
             android:textColorLink="#FFFFFF"
@@ -71,7 +71,8 @@
             app:layout_constraintBottom_toTopOf="@+id/listView"
             app:layout_constraintEnd_toStartOf="@+id/btnErdikoa"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textWorkOutLista" />
+            app:layout_constraintTop_toBottomOf="@+id/textWorkOutLista"
+            tools:text="@string/hasierakoa" />
 
         <Button
             android:id="@+id/btnAurreratu"
