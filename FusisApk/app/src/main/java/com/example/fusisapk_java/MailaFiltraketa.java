@@ -18,12 +18,9 @@ public class MailaFiltraketa {
 
             if (workoutMaila.equalsIgnoreCase("Hasierakoa")) {
                 hasierakoa.add(workout);
-            } else if ((workoutMaila.equalsIgnoreCase("Hasierakoa")
-                    || workoutMaila.equalsIgnoreCase("Erdimailakoa"))) {
+            } else if (workoutMaila.equalsIgnoreCase("Erdimailakoa")) {
                 erdimailakoa.add(workout);
-            } else if ((workoutMaila.equalsIgnoreCase("Hasierakoa")
-                    || workoutMaila.equalsIgnoreCase("Erdimailakoa")) ||
-                    workoutMaila.equalsIgnoreCase("Aurreratua")) {
+            } else if (workoutMaila.equalsIgnoreCase("Aurreratua")) {
                 aurreratua.add(workout);
             }
         }

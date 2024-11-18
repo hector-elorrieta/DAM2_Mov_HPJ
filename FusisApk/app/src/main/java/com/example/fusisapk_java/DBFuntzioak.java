@@ -42,6 +42,19 @@ public class DBFuntzioak {
         this.context = context;
     }
 
+
+    private void egiaztatuFirebase(FirebaseUser user) {
+        db.collection("erabiltzaileak").document(user.getEmail()).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                    } else {
+                        Log.e("Firestore", "Error al obtener documento",
+                                task.getException());
+                    }
+                });
+    }
+
     public void erregistroEgin(Erabiltzaile erabiltzaile) {
 
         String izena = erabiltzaile.getIzena();
@@ -156,17 +169,15 @@ public class DBFuntzioak {
     }
 
 
-    private void egiaztatuFirebase(FirebaseUser user) {
-        db.collection("erabiltzaileak").document(user.getEmail()).get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                    } else {
-                        Log.e("Firestore", "Error al obtener documento",
-                                                                            task.getException());
-                    }
-                });
-    }
+
+
+
+
+
+
+
+
+
 
     public void datuakBete(OnDataLoadCallback callback) {
         db.collection("erabiltzaileak")

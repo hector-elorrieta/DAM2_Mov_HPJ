@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.fusisapk_java.DBFuntzioak;
+import com.example.fusisapk_java.MailaFiltraketa;
 import com.example.fusisapk_java.R;
 import com.example.fusisapk_java.Workout;
 import com.example.fusisapk_java.WorkoutAdapter;
@@ -56,7 +57,16 @@ public class WorkoutListFragment extends Fragment {
 
         return view;
     }
+    private void updateListView(ArrayList<Workout> filteredWorkouts) {
+        if (filteredWorkouts == null || filteredWorkouts.isEmpty()) {
+            Toast.makeText(getContext(), "No hay workouts para mostrar", Toast.LENGTH_SHORT).show();
+            listView.setAdapter(null); // Limpia la lista si no hay elementos
+            return;
+        }
 
+        WorkoutAdapter workoutAdapter = new WorkoutAdapter(getContext(), filteredWorkouts);
+        listView.setAdapter(workoutAdapter);
+    }
     private void loadWorkoutList() {
         dbFuntzioak.getWorkoutList(new DBFuntzioak.OnWorkoutListDataLoadCallback() {
             @Override
@@ -66,8 +76,19 @@ public class WorkoutListFragment extends Fragment {
                     return;
                 }
 
-                WorkoutAdapter workoutAdapter = new WorkoutAdapter(getContext(), workoutList);
-                listView.setAdapter(workoutAdapter);
+                // Crear la instancia de MailaFiltraketa para filtrar workouts
+                MailaFiltraketa filtraketa = new MailaFiltraketa(workoutList);
+
+                // Inicialmente mostrar todos los workouts
+                updateListView(workoutList);
+
+                // Habilitar botones según los niveles disponibles
+                enableButtons(workoutList);
+
+                // Configurar los botones para filtrar por nivel
+                btnHasierakoa.setOnClickListener(v -> updateListView(filtraketa.getHasierakoa()));
+                btnErdimailakoa.setOnClickListener(v -> updateListView(filtraketa.getErdimailakoa()));
+                btnAurreratua.setOnClickListener(v -> updateListView(filtraketa.getAurreratua()));
 
                 // Hacer clic en un elemento de la lista
                 listView.setOnItemClickListener((parent, view, position, id) -> {
@@ -78,11 +99,10 @@ public class WorkoutListFragment extends Fragment {
                     transaction.addToBackStack(null);
                     transaction.commit();
                 });
-
-                enableButtons(workoutList);
             }
         });
     }
+
 
     private void enableButtons(ArrayList<Workout> workoutList) {
         for (Workout workout : workoutList) {
@@ -98,3 +118,4 @@ public class WorkoutListFragment extends Fragment {
         }
     }
 }
+
