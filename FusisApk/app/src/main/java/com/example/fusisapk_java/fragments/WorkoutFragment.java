@@ -47,8 +47,7 @@ public class WorkoutFragment extends Fragment {
         textWorkErabiltzaile.setText(logeatuta.getErabiltzailea());
         textWorkMaila.setText(logeatuta.getMaila());
 
-        if (logeatuta.getMaila().equalsIgnoreCase("Bezeroa")
-                        || !Objects.equals(logeatuta.getMaila(), "Entrenatzailea")) {
+        if (logeatuta.getMota().equalsIgnoreCase("Bezeroa")) {
             btnWorkout.setVisibility(View.GONE);
         }
 

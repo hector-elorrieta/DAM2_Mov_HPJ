@@ -60,7 +60,7 @@ public class WorkoutListFragment extends Fragment {
     private void updateListView(ArrayList<Workout> filteredWorkouts) {
         if (filteredWorkouts == null || filteredWorkouts.isEmpty()) {
             Toast.makeText(getContext(), "No hay workouts para mostrar", Toast.LENGTH_SHORT).show();
-            listView.setAdapter(null); // Limpia la lista si no hay elementos
+            listView.setAdapter(null);
             return;
         }
 
@@ -72,25 +72,20 @@ public class WorkoutListFragment extends Fragment {
             @Override
             public void onWorkoutListDataLoaded(ArrayList<Workout> workoutList) {
                 if (workoutList == null || workoutList.isEmpty()) {
-                    Toast.makeText(getContext(), "No se encontraron workouts", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Ez dira topatu workout-ak",
+                                                        Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // Crear la instancia de MailaFiltraketa para filtrar workouts
                 MailaFiltraketa filtraketa = new MailaFiltraketa(workoutList);
-
-                // Inicialmente mostrar todos los workouts
                 updateListView(workoutList);
-
-                // Habilitar botones según los niveles disponibles
                 enableButtons(workoutList);
 
-                // Configurar los botones para filtrar por nivel
                 btnHasierakoa.setOnClickListener(v -> updateListView(filtraketa.getHasierakoa()));
                 btnErdimailakoa.setOnClickListener(v -> updateListView(filtraketa.getErdimailakoa()));
                 btnAurreratua.setOnClickListener(v -> updateListView(filtraketa.getAurreratua()));
 
-                // Hacer clic en un elemento de la lista
+                // Workout bat aukeratzean, WorkoutDetailsFragment-era joateko
                 listView.setOnItemClickListener((parent, view, position, id) -> {
                     Workout selectedWorkout = workoutList.get(position);
                     WorkoutDetailsFragment detailsFragment = WorkoutDetailsFragment.newInstance(selectedWorkout);

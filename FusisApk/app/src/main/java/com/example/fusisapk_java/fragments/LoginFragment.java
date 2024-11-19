@@ -72,7 +72,7 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-    // Guardar usuario y contraseña en un archivo .dat si el checkbox está marcado
+    // Gorde erabiltzaile datuak .dat fitxategian
     public void gordeDatuakCheckbox(String mail, String pasahitza) {
         if (checkBoxGogoratu.isChecked()) {
             try (FileOutputStream fos = getActivity().
@@ -99,6 +99,7 @@ public class LoginFragment extends Fragment {
         }
     }
 
+    // Datuak kargatu .dat fitxategitik
     public void datuakKargatu() {
         if (textEmail != null && textPasahitza != null && checkBoxGogoratu != null) {
             try (FileInputStream fis = getActivity().openFileInput("files\\loginData.dat");

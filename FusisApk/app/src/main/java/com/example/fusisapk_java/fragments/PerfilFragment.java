@@ -159,19 +159,15 @@ public class PerfilFragment extends Fragment {
     }
 
     private void setLocale(String langCode) {
-        // Crear un nuevo Locale con el código de idioma (por ejemplo, "es" o "default")
         Locale locale = new Locale(langCode);
         Locale.setDefault(locale);
 
-        // Configurar el nuevo idioma en los recursos
         Resources resources = getResources();
         Configuration config = resources.getConfiguration();
         config.setLocale(locale);
 
-        // Actualizar la configuración global
         resources.updateConfiguration(config, resources.getDisplayMetrics());
 
-        // Recargar el fragmento actual para aplicar los cambios
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, new PerfilFragment());
         transaction.addToBackStack(null);

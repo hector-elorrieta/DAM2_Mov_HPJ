@@ -46,7 +46,8 @@ public class WorkoutDetailsFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                                                            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_workout_details, container, false);
 
         etName = view.findViewById(R.id.etIzena);
@@ -134,7 +135,7 @@ public class WorkoutDetailsFragment extends Fragment {
                                                                         Toast.LENGTH_SHORT).show();
                                 getParentFragmentManager().popBackStack();
                             } else {
-                                Toast.makeText(getContext(), "Error al eliminar el workout",
+                                Toast.makeText(getContext(), "Error workout ezabatzean",
                                                                         Toast.LENGTH_SHORT).show();
                             }
                         });

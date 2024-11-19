@@ -35,7 +35,6 @@ public class DBFuntzioak {
 
     AldagaiOrokorrak aldagaiOrokorrak = new AldagaiOrokorrak();
 
-    // Constructor para inicializar FirebaseAuth, FirebaseFirestore, y el contexto
     public DBFuntzioak(Context context) {
         this.mAuth = FirebaseAuth.getInstance();
         this.db = FirebaseFirestore.getInstance();
@@ -49,7 +48,7 @@ public class DBFuntzioak {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                     } else {
-                        Log.e("Firestore", "Error al obtener documento",
+                        Log.e("Firestore", "Error dokumentua lortzean: ",
                                 task.getException());
                     }
                 });
@@ -147,14 +146,13 @@ public class DBFuntzioak {
                         // datos se hayan cargado
                         datuakBete(success -> {
                             if (success) {
-                                // Los datos están listos, ahora podemos cargar el fragmento
                                 WorkoutFragment workoutFragment = new WorkoutFragment();
                                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                                 transaction.replace(R.id.fragment_container, workoutFragment);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
                             } else {
-                                Toast.makeText(context, "Error al cargar los datos",
+                                Toast.makeText(context, "Error datu kargatzean",
                                                                         Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -167,17 +165,6 @@ public class DBFuntzioak {
         // Guarda el usuario logueado temporalmente
         aldagaiOrokorrak.erabiltzaileLogueatuta = new Erabiltzaile(mail, pasahitza);
     }
-
-
-
-
-
-
-
-
-
-
-
 
     public void datuakBete(OnDataLoadCallback callback) {
         db.collection("erabiltzaileak")
@@ -210,10 +197,8 @@ public class DBFuntzioak {
     }
 
     public ArrayList<Historikoa> hartuHistorikoaErabiltzailea() {
-        // Crear la lista de resultados
         ArrayList<Historikoa> historikoList = new ArrayList<>();
 
-        // Consulta a la colección "erabiltzaileak"
         db.collection("erabiltzaileak")
                 .whereEqualTo("mail", aldagaiOrokorrak.erabiltzaileLogueatuta.getMail())
                 .get()
@@ -251,11 +236,10 @@ public class DBFuntzioak {
                                         }
                                     });
                         } else {
-                            Log.e("Error", "No se encontró el usuario");
+                            Log.e("Error", "Erabiltzailea ez da existitzen");
                         }
                     } else {
-                        // Manejo de errores de la consulta principal
-                        Log.e("Error","Error al obtener el usuario: " + task.getException().getMessage());
+                        Log.e("Error","Error erabiltzailea lortzen: " + task.getException().getMessage());
                     }
                 });
 
@@ -284,7 +268,7 @@ public class DBFuntzioak {
                     callback.onWorkoutListLoaded(workoutsEgindak);
                 }
             } else {
-                Log.e("Error", "Error al cargar la lista de workouts");
+                Log.e("Error", "Error workout list lortzean");
                 if (callback != null) {
                     callback.onWorkoutListLoaded(new ArrayList<>());
                 }
@@ -318,7 +302,6 @@ public class DBFuntzioak {
                 });
     }
     public boolean addWorkout(Workout workout) {
-        // Obtén una referencia a la colección "workouts" en Firestore
         CollectionReference workoutsRef = db.collection("workouts");
 
         // Crear un mapa con los datos del workout
@@ -328,17 +311,16 @@ public class DBFuntzioak {
         workoutData.put("link", workout.getLink());
         workoutData.put("maila", workout.getMaila());
 
-        // Agregar el workout a Firestore
         workoutsRef.add(workoutData)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Log.d("Workout", "Workout añadido correctamente");
+                        Log.d("Workout", "Workout ondo gehitu da");
                     } else {
-                        Log.e("Workout", "Error al añadir el workout", task.getException());
+                        Log.e("Workout", "Error workout gehitzen", task.getException());
                     }
                 });
 
-        return true;  // Retorna true indicando que el workout fue guardado correctamente
+        return true;
     }
 
 
@@ -353,7 +335,6 @@ public class DBFuntzioak {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                        // Eliminar el primer documento que coincida
                         task.getResult().getDocuments().get(0).getReference()
                                 .delete()
                                 .addOnSuccessListener(unused -> listener.onComplete(true))
@@ -385,15 +366,6 @@ public class DBFuntzioak {
                 });
     }
 
-
-
-
-
-
-
-
-
-
     public interface OnCompletionListener {
         void onComplete(boolean success);
     }
@@ -410,7 +382,5 @@ public class DBFuntzioak {
     public interface OnDataLoadCallback {
         void onDataLoaded(boolean success);
     }
-
-
 }
 

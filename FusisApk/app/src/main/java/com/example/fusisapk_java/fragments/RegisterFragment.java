@@ -102,7 +102,6 @@ public class RegisterFragment extends Fragment implements DatePickerDialog.OnDat
                 String mota = spinnerMota.getSelectedItem().toString();
                 String jaiotzeDataString = editJaiotzeData.getText().toString().trim();
 
-                // Validaciones
                 if (izena.isEmpty() || izena.length() < 2) {
                     Toast.makeText(requireContext(),
                             "Izena gutxienez 2 karaktere izan behar ditu.",
